@@ -17,6 +17,7 @@ export default function Home() {
     const { data: signer, isError, isLoading } = useSigner()
 
     const [insurances, setInsurances] = useState([])
+    const [insuranceData, setInsuranceData] = useState([])
 
     useEffect(() => {
         fetchInsurances()
@@ -43,7 +44,7 @@ export default function Home() {
                 headers: {
                     accept: "application/json",
                     "content-type": "application/json",
-                    "X-API-Key": "test",
+                    "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY,
                 },
                 data: { abi: burfyAbi },
             }
@@ -51,6 +52,7 @@ export default function Home() {
             axios
                 .request(options)
                 .then(function (response) {
+                    setInsuranceData(response.data)
                     console.log(response.data)
                 })
                 .catch(function (error) {
