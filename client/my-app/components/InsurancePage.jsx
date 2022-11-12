@@ -353,6 +353,36 @@ function InsurancePage() {
     }
 
     const handleJoinRequestClick = async () => {
+        let cid
+        try {
+            const options = {
+                method: "POST",
+                url: "https://deep-index.moralis.io/api/v2/ipfs/uploadFolder",
+                headers: {
+                    accept: "application/json",
+                    "content-type": "application/json",
+                    "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+                },
+                data: [
+                    {
+                        path: "data.json",
+                        content: JSON.stringify({ description: joiningDescription }),
+                    },
+                ],
+            }
+
+            axios
+                .request(options)
+                .then(function (response) {
+                    console.log(response.data)
+                    cid = response.data.cid
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+        } catch (error) {
+            console.log(error)
+        }
         if (!isConnected) {
             showNotification({
                 id: "hello-there",
