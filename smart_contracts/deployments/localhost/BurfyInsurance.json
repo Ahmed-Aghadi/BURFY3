@@ -1,0 +1,1311 @@
+{
+  "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "baseUri",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requestTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "validity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "claimTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "judgingTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "judgesLength",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "percentDivideIntoJudges",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "WithdrawFailed",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        }
+      ],
+      "name": "acceptJoiningRequest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "addAsMember",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "fullfillRequests",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "memberAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBaseUri",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getClaimAcceptedLength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getClaimById",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "memberAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "requestUri",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accepted",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BurfyInsurance.InsuranceClaimRequest",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "memberAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getClaimIdByAddress",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getClaimsAccepted",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "claimId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BurfyInsurance.ClaimAccepted[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDeadlineMet",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getIsClaimFullfilled",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getIsJudgeSelected",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getIsMinimumMembersReached",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getIsMinimumMembersReachedCalculated",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getJudgeById",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "memberAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getJudgeIdByAddress",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "judgeAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getJudged",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "judgeId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "claimId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getJudgement",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "accepted",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "reasonUri",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct BurfyInsurance.Judgement",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getJudgesFullFilledJobs",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "judgeId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BurfyInsurance.JudgementJobFullfilled[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getJudgesLength",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getJudgingEndTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getJudgingStartTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMemberById",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "memberAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getMemberIdByAddress",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "memberId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMemberRequestAcceptance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMinMembers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPercentageDividedIntoJudges",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRequestBefore",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRequestById",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "memberAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "requestUri",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accepted",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BurfyInsurance.MemberRequest",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "memberAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getRequestIdByAddress",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalClaimAmountAccepted",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalClaimAmountRequested",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalClaims",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalMembers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalRequests",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getValidity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "uri",
+          "type": "string"
+        }
+      ],
+      "name": "makeJoiningRequest",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "baseUri",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "requestForInsurance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "randomNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "selectJudges",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "claimId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "accepted",
+          "type": "bool"
+        },
+        {
+          "internalType": "string",
+          "name": "reasonUri",
+          "type": "string"
+        }
+      ],
+      "name": "updateInsurance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawMemberRequest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xfe433d1b17fbf4f138f0a33b3aa6588464fa1e53b406faab82e676cec16c3e18",
+  "receipt": {
+    "to": null,
+    "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "transactionIndex": 0,
+    "gasUsed": "2770830",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000040020000000000000100000800000000000000000000000000000000400000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000040000000200000000000000000000000002000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x15be4b1ceb684420f8b854a759bf6198942eac5963a3dd4d84178229917cb9e5",
+    "transactionHash": "0xfe433d1b17fbf4f138f0a33b3aa6588464fa1e53b406faab82e676cec16c3e18",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 1,
+        "transactionHash": "0xfe433d1b17fbf4f138f0a33b3aa6588464fa1e53b406faab82e676cec16c3e18",
+        "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0x15be4b1ceb684420f8b854a759bf6198942eac5963a3dd4d84178229917cb9e5"
+      }
+    ],
+    "blockNumber": 1,
+    "cumulativeGasUsed": "2770830",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "abc",
+    2,
+    600,
+    500,
+    400,
+    300,
+    1,
+    "10000000000000000",
+    1
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "3ab734f476a9cb677d337b74d4faf03b",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"baseUri\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"minMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"validity\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"claimTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"judgingTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"judgesLength\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"percentDivideIntoJudges\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"WithdrawFailed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"acceptJoiningRequest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"addAsMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"fullfillRequests\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"}],\"name\":\"getBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBaseUri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getClaimAcceptedLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"getClaimById\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"requestUri\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"accepted\",\"type\":\"uint256\"}],\"internalType\":\"struct BurfyInsurance.InsuranceClaimRequest\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"}],\"name\":\"getClaimIdByAddress\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getClaimsAccepted\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"claimId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct BurfyInsurance.ClaimAccepted[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDeadlineMet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsClaimFullfilled\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsJudgeSelected\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsMinimumMembersReached\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsMinimumMembersReachedCalculated\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"getJudgeById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"}],\"name\":\"getJudgeIdByAddress\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"judgeAddress\",\"type\":\"address\"}],\"name\":\"getJudged\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"judgeId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"claimId\",\"type\":\"uint256\"}],\"name\":\"getJudgement\",\"outputs\":[{\"components\":[{\"internalType\":\"bool\",\"name\":\"accepted\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"reasonUri\",\"type\":\"string\"}],\"internalType\":\"struct BurfyInsurance.Judgement\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getJudgesFullFilledJobs\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"judgeId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct BurfyInsurance.JudgementJobFullfilled[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getJudgesLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getJudgingEndTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getJudgingStartTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"getMemberById\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"}],\"name\":\"getMemberIdByAddress\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"memberId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"getMemberRequestAcceptance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getMinMembers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPercentageDividedIntoJudges\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRequestBefore\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"getRequestById\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"requestUri\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"accepted\",\"type\":\"uint256\"}],\"internalType\":\"struct BurfyInsurance.MemberRequest\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"memberAddress\",\"type\":\"address\"}],\"name\":\"getRequestIdByAddress\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalClaimAmountAccepted\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalClaimAmountRequested\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalClaims\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalMembers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalRequests\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getValidity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"uri\",\"type\":\"string\"}],\"name\":\"makeJoiningRequest\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"baseUri\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"requestForInsurance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"randomNumber\",\"type\":\"uint256\"}],\"name\":\"selectJudges\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"claimId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"accepted\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"reasonUri\",\"type\":\"string\"}],\"name\":\"updateInsurance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawMemberRequest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BurfyInsurance.sol\":\"BurfyInsurance\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.7.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\"},\"contracts/BurfyInsurance.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.12;\\n\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\nerror WithdrawFailed();\\n\\ncontract BurfyInsurance is Ownable {\\n    struct MemberRequest {\\n        address memberAddress;\\n        string requestUri;\\n        uint256 accepted;\\n    }\\n\\n    struct InsuranceClaimRequest {\\n        address memberAddress;\\n        string requestUri;\\n        uint256 amount;\\n        uint256 accepted;\\n    }\\n\\n    // struct Acceptance {\\n    //     address memberAddress; // member address who will accept joining requests or judge address who will accept claims\\n    //     uint256 id;\\n    // }\\n\\n    struct Judgement {\\n        bool accepted;\\n        string reasonUri;\\n    }\\n\\n    struct ClaimAccepted {\\n        uint256 claimId;\\n        uint256 amount;\\n    }\\n\\n    struct JudgementJobFullfilled {\\n        uint256 judgeId;\\n        uint256 amount; // amount judge will get\\n    }\\n\\n    string private s_baseUri;\\n    uint256 private immutable i_minMembers;\\n    uint256 private immutable i_requestBefore;\\n    uint256 private immutable i_validity;\\n    uint256 private immutable i_judgingStartTime;\\n    uint256 private immutable i_judgingEndTime;\\n    uint256 private immutable i_judgesLength;\\n    uint256 private immutable i_amount;\\n    uint256 private immutable i_percentageDividedIntoJudges;\\n    bool private s_isMinMembersReachedCalculated; // also isJudges selected\\n    bool private s_isMinMembersReached;\\n    uint256 private s_totalClaimAmountRequested;\\n    uint256 private s_totalClaimAmountAccepted;\\n    bool private s_isFinalJudgementCalculated;\\n    // bool private s_isAnyClaimAccepted = s_claimAccepted.length > 0;\\n    // bool private s_isAnyJudgementFullfilledJob == s_judgesFullfilledJobs.length > 0;\\n    uint256 private s_memberNumber = 1; // total members exists + 1\\n    mapping(uint256 => address) private s_idToMemberAddress; // memberNumber (id) => s_memberAddresses\\n    mapping(address => uint256) private s_addressToMemberId; // memberAddress => memberNumber (id)\\n    uint256 private s_requestNumber = 1; // total requests exists + 1\\n    mapping(address => uint256) private s_addressToRequestId; // memberAddress => requestNumber (id)\\n    mapping(uint256 => MemberRequest) private s_idToMemberRequest; // request id number => request\\n    mapping(bytes => bool) private s_memberRequestAcceptances; // abi.encode(Acceptance) => member request accepted or not\\n    uint256 private s_claimNumber = 1; // total claims exists + 1\\n    mapping(address => uint256) s_addressToClaimId; // memberAddress => Insurance claimId\\n    mapping(uint256 => InsuranceClaimRequest) s_idToClaimRequest; // Insurance claimId => request\\n    mapping(address => uint256) s_addressToJudgeId; // memberAddress => Insurance claimId (even judge id starts from 1)\\n    mapping(uint256 => address) s_idToJudgeAddress; // Insurance claimId => memberAddress (even judge id starts from 1)\\n    bool private s_judgesSelected = false;\\n    mapping(bytes => Judgement) private s_judgements; // abi.encode(Acceptance) => accepted or not + reason\\n    mapping(address => uint256) private s_judged; // judge address => number of judgement\\n\\n    JudgementJobFullfilled[] private s_judgesFullfilledJobs; // judges who fullfilled their job that is judged everyone && obviously index starts from 0\\n    ClaimAccepted[] private s_claimAccepted; // claims which are accepted that more than half of judges has accepted && obviously index starts from 0\\n\\n    mapping(address => uint256) private s_balance; // member address => balance (after claim accepted)\\n\\n    constructor(\\n        string memory baseUri,\\n        uint256 minMembers,\\n        uint256 requestTime, // (in seconds) time before one can make a request\\n        uint256 validity, // (in seconds) insurance valid after startBefore seconds and user can claim insurance after validity\\n        uint256 claimTime, // (in seconds) time before use can make a insurance claim request, after this time judging will start.\\n        uint256 judgingTime, // (in seconds) time before judges should judge insurance claim requests.\\n        uint256 judgesLength, // number of judges\\n        uint256 amount, // amount everyone should put in the pool\\n        uint256 percentDivideIntoJudges // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)\\n    ) {\\n        require(minMembers > 0, \\\"BurfyInsurance: minMembers should be greater than 0\\\");\\n        require(requestTime > 0, \\\"BurfyInsurance: requestTime should be greater than 0\\\");\\n        require(validity > 0, \\\"BurfyInsurance: validity should be greater than 0\\\");\\n        require(claimTime > 0, \\\"BurfyInsurance: judgingStartTime should be greater than 0\\\");\\n        require(judgingTime > 0, \\\"BurfyInsurance: judgingTime should be greater than 0\\\");\\n        require(judgesLength > 0, \\\"BurfyInsurance: judgesLength should be greater than 0\\\");\\n        require(\\n            judgesLength <= minMembers,\\n            \\\"BurfyInsurance: judgesLength should be less than or equal to minMembers\\\"\\n        );\\n        require(amount > 0, \\\"BurfyInsurance: amount should be greater than 0\\\");\\n        require(\\n            percentDivideIntoJudges > 0,\\n            \\\"BurfyInsurance: percentDivideIntoJudges should be greater than 0\\\"\\n        );\\n        require(\\n            percentDivideIntoJudges <= 100,\\n            \\\"BurfyInsurance: percentDivideIntoJudges should be less than or equal to 100\\\"\\n        );\\n\\n        s_baseUri = baseUri;\\n        i_minMembers = minMembers;\\n        i_requestBefore = block.timestamp + requestTime;\\n        i_validity = i_requestBefore + validity;\\n        i_judgingStartTime = i_validity + claimTime;\\n        i_judgingEndTime = i_judgingStartTime + judgingTime;\\n        i_judgesLength = judgesLength;\\n        i_amount = amount;\\n        i_percentageDividedIntoJudges = percentDivideIntoJudges;\\n    }\\n\\n    // function getBaseUri() public view returns (string memory) {\\n    //     return s_baseUri;\\n    // }\\n\\n    // function getMemberNumber(address memberAddress) public view returns (uint256) {\\n    //     return s_addressToMemberId[memberAddress];\\n    // }\\n\\n    // function getMemberAddress(uint256 memberNumber) public view returns (address) {\\n    //     return s_idToMemberAddress[memberNumber];\\n    // }\\n\\n    // function getMemberCount() public view returns (uint256) {\\n    //     return s_memberNumber - 1;\\n    // }\\n\\n    // function getRequestNumber() public view returns (uint256) {\\n    //     return s_requestNumber - 1;\\n    // }\\n\\n    // function getRequest(uint256 requestId) public view returns (MemberRequest memory) {\\n    //     return s_idToRequest[requestId];\\n    // }\\n\\n    // function getAcceptance(uint256 requestId, address memberAddress) public view returns (bool) {\\n    //     return s_acceptances[Acceptance(memberAddress, requestId)];\\n    // }\\n\\n    // function getClaimNumber() public view returns (uint256) {\\n    //     return s_claimNumber - 1;\\n    // }\\n\\n    function addAsMember() public {\\n        require(block.timestamp < i_requestBefore, \\\"Adding member is not valid anymore\\\");\\n        require(s_addressToMemberId[msg.sender] == 0, \\\"Already a member\\\");\\n        require(\\n            s_idToMemberRequest[s_addressToRequestId[msg.sender]].accepted == s_memberNumber - 1,\\n            \\\"Not all members accepted the request\\\"\\n        );\\n        s_idToMemberAddress[s_memberNumber] = msg.sender;\\n        s_addressToMemberId[msg.sender] = s_memberNumber;\\n        s_memberNumber++;\\n    }\\n\\n    // function addRequest(string memory requestUri) public {\\n    //     s_requests[s_requestNumber] = MemberRequest(msg.sender, requestUri, new uint256[](0));\\n    //     s_requestNumber++;\\n    // }\\n\\n    function acceptJoiningRequest(uint256 requestId) public {\\n        require(s_addressToMemberId[msg.sender] != 0, \\\"Not a member\\\");\\n        require(\\n            s_idToMemberRequest[requestId].memberAddress != address(0),\\n            \\\"Request does not exist\\\"\\n        );\\n        require(\\n            s_memberRequestAcceptances[abi.encode(msg.sender, requestId)] == false,\\n            \\\"Already accepted\\\"\\n        );\\n        s_memberRequestAcceptances[abi.encode(msg.sender, requestId)] = true;\\n        s_idToMemberRequest[requestId].accepted += 1;\\n    }\\n\\n    function makeJoiningRequest(string memory uri) public payable {\\n        require(msg.value == i_amount, \\\"Amount sent isn't correct\\\");\\n        require(block.timestamp < i_requestBefore, \\\"Adding member is not valid anymore\\\");\\n        require(s_addressToMemberId[msg.sender] == 0, \\\"Member already exists\\\");\\n        require(s_addressToRequestId[msg.sender] == 0, \\\"Request already exists\\\");\\n        s_idToMemberRequest[s_requestNumber] = MemberRequest(msg.sender, uri, 0);\\n        s_addressToRequestId[msg.sender] = s_requestNumber;\\n        s_requestNumber++;\\n    }\\n\\n    function requestForInsurance(string memory baseUri, uint256 amount) public {\\n        require(block.timestamp < i_validity, \\\"Contract is not valid anymore\\\");\\n        require(block.timestamp < i_judgingStartTime, \\\"Judging already started\\\");\\n        require(s_addressToMemberId[msg.sender] != 0, \\\"Not a member\\\");\\n        require(s_addressToClaimId[msg.sender] == 0, \\\"Insurance already exists\\\");\\n        s_addressToClaimId[msg.sender] = s_claimNumber;\\n        s_idToClaimRequest[s_claimNumber] = InsuranceClaimRequest(msg.sender, baseUri, amount, 0);\\n        s_totalClaimAmountRequested += amount;\\n        s_claimNumber++;\\n    }\\n\\n    // judges will judge insurance claim requests\\n    function updateInsurance(\\n        uint256 claimId,\\n        bool accepted,\\n        string memory reasonUri\\n    ) public {\\n        require(block.timestamp > i_judgingStartTime, \\\"Judging not started yet\\\");\\n        require(block.timestamp < i_judgingEndTime, \\\"Judging already ended\\\");\\n        require(s_addressToJudgeId[msg.sender] != 0, \\\"Not a judge\\\");\\n        require(\\n            s_idToClaimRequest[claimId].memberAddress != address(0),\\n            \\\"Insurance does not exist\\\"\\n        );\\n        require(\\n            s_judgements[abi.encode(msg.sender, claimId)].accepted == false &&\\n                bytes(reasonUri).length == 0,\\n            \\\"Already updated\\\"\\n        );\\n        if (!accepted) {\\n            require(bytes(reasonUri).length != 0, \\\"Reason uri is empty\\\");\\n        }\\n        s_judgements[abi.encode(msg.sender, claimId)] = Judgement(accepted, reasonUri);\\n        if (accepted) {\\n            s_idToClaimRequest[claimId].accepted += 1;\\n        }\\n        s_judged[msg.sender] += 1;\\n    }\\n\\n    function selectJudges(uint256 randomNumber) public onlyOwner {\\n        require(block.timestamp > i_judgingStartTime, \\\"Judging not started yet\\\");\\n        require(block.timestamp < i_judgingEndTime, \\\"Judging already ended\\\");\\n        require(s_judgesSelected == false, \\\"Judges already selected\\\");\\n        if (!s_isMinMembersReachedCalculated && s_memberNumber - 1 < i_minMembers) {\\n            s_isMinMembersReachedCalculated = true;\\n            s_isMinMembersReached = false;\\n            for (uint256 i = 1; i < s_memberNumber; i++) {\\n                s_balance[s_idToMemberAddress[i]] += i_amount;\\n            }\\n            return;\\n        }\\n        s_isMinMembersReachedCalculated = true;\\n        s_isMinMembersReached = true;\\n        uint256 index = randomNumber % (s_memberNumber - 1);\\n        for (uint256 i = 1; i <= i_judgesLength; i++) {\\n            address judgeAddress = s_idToMemberAddress[index + i]; // as index for member starts from 1\\n            if (s_addressToJudgeId[judgeAddress] != 0) {\\n                i--;\\n                index = (index + index + i + 1) % (s_memberNumber - 1); // 2 * index + 1\\n                continue;\\n            }\\n            index = (index + index + i) % (s_memberNumber - 1); // 2 * index + 1\\n            s_addressToJudgeId[judgeAddress] = i;\\n            s_idToJudgeAddress[i] = judgeAddress;\\n        }\\n    }\\n\\n    function fullfillRequests() public {\\n        require(block.timestamp > i_judgingEndTime, \\\"Judging not ended yet\\\");\\n        require(s_isFinalJudgementCalculated == false, \\\"Already fullfilled\\\");\\n        // if no judges were selected, then pay all members\\n        if (!s_isMinMembersReachedCalculated) {\\n            s_isMinMembersReachedCalculated = true;\\n            s_isMinMembersReached = false;\\n            for (uint256 i = 1; i < s_memberNumber; i++) {\\n                s_balance[s_idToMemberAddress[i]] += i_amount;\\n            }\\n            return;\\n        }\\n        s_isFinalJudgementCalculated = true;\\n\\n        // check whether there's atleast one judge who fullfilled his job that is accepted everyone's request\\n        for (uint256 i = 1; i <= i_judgesLength; i++) {\\n            if (s_judged[s_idToJudgeAddress[i]] == s_claimNumber - 1) {\\n                s_judgesFullfilledJobs.push(JudgementJobFullfilled(i, 0));\\n            }\\n        }\\n\\n        // pay everyone except the judges as no one fullfilled their job\\n        if (s_judgesFullfilledJobs.length == 0) {\\n            uint256 amountForEachMember = (i_amount + i_judgesLength) / (s_memberNumber - 1);\\n            for (uint256 i = 1; i < s_memberNumber; i++) {\\n                if (s_addressToJudgeId[s_idToMemberAddress[i]] == 0) {\\n                    s_balance[s_idToMemberAddress[i]] += amountForEachMember; // no judge will get their money back\\n                }\\n            }\\n            return;\\n        }\\n\\n        // pay all the judges who fullfilled their job\\n        uint256 amountForEachJudge = ((i_percentageDividedIntoJudges * i_amount) /\\n            (100 * s_judgesFullfilledJobs.length));\\n        uint256 amountLeftForMembers = ((i_amount * (s_memberNumber - 1)) -\\n            (amountForEachJudge * s_judgesFullfilledJobs.length));\\n        for (uint256 i = 0; i < s_judgesFullfilledJobs.length; i++) {\\n            s_judgesFullfilledJobs[i].amount = amountForEachJudge;\\n            s_balance[s_idToJudgeAddress[s_judgesFullfilledJobs[i].judgeId]] += amountForEachJudge;\\n        }\\n\\n        // check whether atleast one claim is accepted by majority of judges && calculate amount to be paid to insuranceClaimers who are accepted\\n        for (uint256 i = 1; i < s_claimNumber; i++) {\\n            if (s_idToClaimRequest[i].accepted > (i_judgesLength / 2)) {\\n                s_totalClaimAmountAccepted += s_idToClaimRequest[i].amount;\\n                s_claimAccepted.push(ClaimAccepted(i, 0));\\n            }\\n        }\\n\\n        // pay everyone except the judges as no one fullfilled their job\\n        if (s_claimAccepted.length == 0) {\\n            uint256 amountForEachMember = amountLeftForMembers / (s_memberNumber - 1);\\n\\n            // pay all the judges who fullfilled their job as amountForEachMember\\n            for (uint256 i = 0; i < s_judgesFullfilledJobs.length; i++) {\\n                s_balance[\\n                    s_idToJudgeAddress[s_judgesFullfilledJobs[i].judgeId]\\n                ] += amountForEachMember;\\n            }\\n            // pay everyone except the judges as amountForEachMember as either no one fullfilled their job or who fullfilled their job already got their money\\n            for (uint256 i = 1; i < s_memberNumber; i++) {\\n                if (s_addressToJudgeId[s_idToMemberAddress[i]] == 0) {\\n                    s_balance[s_idToMemberAddress[i]] += amountForEachMember;\\n                }\\n            }\\n            return;\\n        }\\n        uint256 extraAmount = 0;\\n        // calculate extra amount to be paid to insuranceClaimers who are accepted\\n        if (s_totalClaimAmountAccepted >= amountLeftForMembers) {\\n            extraAmount = s_totalClaimAmountAccepted - amountLeftForMembers;\\n            amountLeftForMembers = 0;\\n        }\\n        // pay insuranceClaimers who are accepted\\n        for (uint256 i = 0; i < s_claimAccepted.length; i++) {\\n            uint256 amountRequested = s_idToClaimRequest[s_claimAccepted[i].claimId].amount;\\n            uint256 amountToPay = amountRequested -\\n                ((amountRequested * extraAmount) / s_totalClaimAmountAccepted);\\n            s_claimAccepted[i].amount = amountToPay;\\n            s_balance[s_idToClaimRequest[s_claimAccepted[i].claimId].memberAddress] += amountToPay;\\n        }\\n        // if there's any amount left, pay it to everyone\\n        if (amountLeftForMembers > 0) {\\n            uint256 amountForEachMember = amountLeftForMembers / (s_memberNumber - 1);\\n            // pay all the judges who fullfilled their job as amountForEachMember\\n            for (uint256 i = 0; i < s_judgesFullfilledJobs.length; i++) {\\n                s_balance[\\n                    s_idToJudgeAddress[s_judgesFullfilledJobs[i].judgeId]\\n                ] += amountForEachMember;\\n            }\\n            // pay everyone except the judges as amountForEachMember as either no one fullfilled their job or who fullfilled their job already got their money\\n            for (uint256 i = 1; i < s_memberNumber; i++) {\\n                if (s_addressToJudgeId[s_idToMemberAddress[i]] == 0) {\\n                    s_balance[s_idToMemberAddress[i]] += amountForEachMember;\\n                }\\n            }\\n        }\\n    }\\n\\n    function withdraw() public {\\n        require(s_balance[msg.sender] > 0, \\\"No balance\\\");\\n        uint256 amount = s_balance[msg.sender];\\n        s_balance[msg.sender] = 0;\\n        (bool success, ) = payable(msg.sender).call{value: amount}(\\\"\\\");\\n        if (!success) {\\n            revert WithdrawFailed();\\n        }\\n    }\\n\\n    function withdrawMemberRequest() public {\\n        require(s_addressToRequestId[msg.sender] != 0, \\\"No request\\\");\\n        require(block.timestamp > i_requestBefore, \\\"Time is still left\\\");\\n        uint256 amount = i_amount;\\n        s_addressToRequestId[msg.sender] = 0;\\n        s_idToMemberRequest[s_memberNumber] = MemberRequest(address(0), \\\"\\\", 0);\\n        (bool success, ) = payable(msg.sender).call{value: amount}(\\\"\\\");\\n        if (!success) {\\n            revert WithdrawFailed();\\n        }\\n    }\\n\\n    function getBaseUri() public view returns (string memory) {\\n        return s_baseUri;\\n    }\\n\\n    function getMinMembers() public view returns (uint256) {\\n        return i_minMembers;\\n    }\\n\\n    function getRequestBefore() public view returns (uint256) {\\n        return i_requestBefore;\\n    }\\n\\n    function getValidity() public view returns (uint256) {\\n        return i_validity;\\n    }\\n\\n    function getJudgingStartTime() public view returns (uint256) {\\n        return i_judgingStartTime;\\n    }\\n\\n    function getJudgingEndTime() public view returns (uint256) {\\n        return i_judgingEndTime;\\n    }\\n\\n    function getJudgesLength() public view returns (uint256) {\\n        return i_judgesLength;\\n    }\\n\\n    function getAmount() public view returns (uint256) {\\n        return i_amount;\\n    }\\n\\n    function getTotalMembers() public view returns (uint256) {\\n        return s_memberNumber - 1;\\n    }\\n\\n    function getDeadlineMet() public view returns (bool) {\\n        return getTotalMembers() >= i_minMembers;\\n    }\\n\\n    function getMemberById(uint256 id) public view returns (address) {\\n        return s_idToMemberAddress[id];\\n    }\\n\\n    function getMemberIdByAddress(address memberAddress) public view returns (uint256) {\\n        return s_addressToMemberId[memberAddress];\\n    }\\n\\n    function getTotalRequests() public view returns (uint256) {\\n        return s_requestNumber - 1;\\n    }\\n\\n    function getRequestById(uint256 id) public view returns (MemberRequest memory) {\\n        return s_idToMemberRequest[id];\\n    }\\n\\n    function getRequestIdByAddress(address memberAddress) public view returns (uint256) {\\n        return s_addressToRequestId[memberAddress];\\n    }\\n\\n    function getMemberRequestAcceptance(uint256 memberId, uint256 requestId)\\n        public\\n        view\\n        returns (bool)\\n    {\\n        return s_memberRequestAcceptances[abi.encode(s_idToMemberAddress[memberId], requestId)];\\n    }\\n\\n    function getTotalClaims() public view returns (uint256) {\\n        return s_claimNumber - 1;\\n    }\\n\\n    function getClaimById(uint256 id) public view returns (InsuranceClaimRequest memory) {\\n        return s_idToClaimRequest[id];\\n    }\\n\\n    function getClaimIdByAddress(address memberAddress) public view returns (uint256) {\\n        return s_addressToClaimId[memberAddress];\\n    }\\n\\n    function getJudgeById(uint256 id) public view returns (address) {\\n        return s_idToJudgeAddress[id];\\n    }\\n\\n    function getJudgeIdByAddress(address memberAddress) public view returns (uint256) {\\n        return s_addressToJudgeId[memberAddress];\\n    }\\n\\n    function getJudgement(uint256 judgeId, uint256 claimId) public view returns (Judgement memory) {\\n        return s_judgements[abi.encode(s_idToJudgeAddress[judgeId], claimId)];\\n    }\\n\\n    function getJudged(address judgeAddress) public view returns (uint256) {\\n        return s_judged[judgeAddress];\\n    }\\n\\n    function getJudgesFullFilledJobs() public view returns (JudgementJobFullfilled[] memory) {\\n        return s_judgesFullfilledJobs;\\n    }\\n\\n    function getClaimAcceptedLength() public view returns (uint256) {\\n        return s_claimAccepted.length;\\n    }\\n\\n    function getClaimsAccepted() public view returns (ClaimAccepted[] memory) {\\n        return s_claimAccepted;\\n    }\\n\\n    function getTotalClaimAmountRequested() public view returns (uint256) {\\n        return s_totalClaimAmountRequested;\\n    }\\n\\n    function getTotalClaimAmountAccepted() public view returns (uint256) {\\n        return s_totalClaimAmountAccepted;\\n    }\\n\\n    function getIsClaimFullfilled() public view returns (bool) {\\n        return s_isFinalJudgementCalculated;\\n    }\\n\\n    function getPercentageDividedIntoJudges() public view returns (uint256) {\\n        return i_percentageDividedIntoJudges;\\n    }\\n\\n    function getBalance(address memberAddress) public view returns (uint256) {\\n        return s_balance[memberAddress];\\n    }\\n\\n    function getIsMinimumMembersReachedCalculated() public view returns (bool) {\\n        return s_isMinMembersReachedCalculated;\\n    }\\n\\n    function getIsJudgeSelected() public view returns (bool) {\\n        return s_isMinMembersReachedCalculated; // both are calculated at the same time\\n    }\\n\\n    function getIsMinimumMembersReached() public view returns (bool) {\\n        return s_isMinMembersReached;\\n    }\\n\\n    // function getIsAnyClaimAccepted() public view returns (bool) {\\n    //     return s_claimAccepted.length > 0;\\n    // }\\n\\n    // function getIsAnyJudgeFullfilledTheirJob() public view returns (bool) {\\n    //     return s_judgesFullfilledJobs.length > 0;\\n    // }\\n}\\n\",\"keccak256\":\"0x5a3c5b8a7909b86d858dd130d22f0368a42041852f9fe0c659c0ff95ee934242\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x610180604052600160068190556009819055600d556012805460ff191690553480156200002b57600080fd5b50604051620037d7380380620037d78339810160408190526200004e916200065f565b620000593362000553565b60008811620000d55760405162461bcd60e51b815260206004820152603360248201527f4275726679496e737572616e63653a206d696e4d656d626572732073686f756c60448201527f642062652067726561746572207468616e20300000000000000000000000000060648201526084015b60405180910390fd5b600087116200014d5760405162461bcd60e51b815260206004820152603460248201527f4275726679496e737572616e63653a207265717565737454696d652073686f7560448201527f6c642062652067726561746572207468616e20300000000000000000000000006064820152608401620000cc565b60008611620001b95760405162461bcd60e51b815260206004820152603160248201527f4275726679496e737572616e63653a2076616c69646974792073686f756c6420604482015270062652067726561746572207468616e203607c1b6064820152608401620000cc565b60008511620002315760405162461bcd60e51b815260206004820152603960248201527f4275726679496e737572616e63653a206a756467696e67537461727454696d6560448201527f2073686f756c642062652067726561746572207468616e2030000000000000006064820152608401620000cc565b60008411620002a95760405162461bcd60e51b815260206004820152603460248201527f4275726679496e737572616e63653a206a756467696e6754696d652073686f7560448201527f6c642062652067726561746572207468616e20300000000000000000000000006064820152608401620000cc565b60008311620003105760405162461bcd60e51b815260206004820152603560248201526000805160206200379783398151915260448201527f756c642062652067726561746572207468616e203000000000000000000000006064820152608401620000cc565b87831115620003875760405162461bcd60e51b815260206004820152604760248201526000805160206200379783398151915260448201527f756c64206265206c657373207468616e206f7220657175616c20746f206d696e6064820152664d656d6265727360c81b608482015260a401620000cc565b60008211620003f15760405162461bcd60e51b815260206004820152602f60248201527f4275726679496e737572616e63653a20616d6f756e742073686f756c6420626560448201526e02067726561746572207468616e203608c1b6064820152608401620000cc565b600081116200045a576040805162461bcd60e51b8152602060048201526024810191909152600080516020620037b783398151915260448201527f6f4a75646765732073686f756c642062652067726561746572207468616e20306064820152608401620000cc565b6064811115620004d65760405162461bcd60e51b815260206004820152604b6024820152600080516020620037b783398151915260448201527f6f4a75646765732073686f756c64206265206c657373207468616e206f72206560648201526a07175616c20746f203130360ac1b608482015260a401620000cc565b8851620004eb9060019060208c0190620005a3565b506080889052620004fd87426200078c565b60a08190526200050f9087906200078c565b60c0819052620005219086906200078c565b60e0819052620005339085906200078c565b6101005261012092909252610140526101605250620007f0945050505050565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b828054620005b190620007b3565b90600052602060002090601f016020900481019282620005d5576000855562000620565b82601f10620005f057805160ff191683800117855562000620565b8280016001018555821562000620579182015b828111156200062057825182559160200191906001019062000603565b506200062e92915062000632565b5090565b5b808211156200062e576000815560010162000633565b634e487b7160e01b600052604160045260246000fd5b60008060008060008060008060006101208a8c0312156200067f57600080fd5b89516001600160401b03808211156200069757600080fd5b818c0191508c601f830112620006ac57600080fd5b815181811115620006c157620006c162000649565b604051601f8201601f19908116603f01168101908382118183101715620006ec57620006ec62000649565b81604052828152602093508f848487010111156200070957600080fd5b600091505b828210156200072d57848201840151818301850152908301906200070e565b828211156200073f5760008484830101525b809d50505050808c01519950505060408a0151965060608a0151955060808a0151945060a08a0151935060c08a0151925060e08a015191506101008a015190509295985092959850929598565b60008219821115620007ae57634e487b7160e01b600052601160045260246000fd5b500190565b600181811c90821680620007c857607f821691505b60208210811415620007ea57634e487b7160e01b600052602260045260246000fd5b50919050565b60805160a05160c05160e05161010051610120516101405161016051612e99620008fe6000396000818161070701526112f10152600081816107c701528181610b2401528181610de60152818161108b01528181611208015281816112d0015281816113470152611af60152600081816102f201528181610b9e015281816110e2015281816111e701526114590152600081816104fa01528181610a1101528181610f90015261227601526000818161035c015281816109c90152818161208f015261223701526000818161044f015261202001526000818161038f01528181610d1f015281816119960152611b6101526000818161063c01528181610aab01526126950152612e996000f3fe60806040526004361061020d5760003560e01c8063071694fb146102125780630a4b5162146102475780630cac36b21461028b57806313284cdd146102ad578063134fe304146102e357806316daa23b146103165780631a9d78791461032b5780631e1e94991461034d578063201095b71461038057806321e3ca5d146103b3578063253ecfcf146103c857806326757b73146103fe5780632ddfd9281461042b5780633b7f7cfa146104405780633ccfd60b146104735780633e035c78146104885780633f952091146104d65780634340b213146104eb5780634c6ee3821461051e5780635ee8906d1461053157806365b21d14146105465780636f80886c14610573578063715018a6146105a95780637248f579146105be57806379ee10b0146105e05780637d4b1a5f146105f85780638170aff01461060d5780638618e9d31461062d5780638c9a92a2146106605780638da5cb5b146106785780638f1803051461068d578063a095f2b4146106a2578063b0118f4a14610660578063b035d6e1146106c2578063b7e44ba4146106f8578063bfbdef7e1461072b578063c864b70e14610740578063cf1dd2b414610760578063cfdd1ce314610782578063d321fe29146107b8578063e12c2d91146107eb578063e57384db14610818578063ed3ee1de14610835578063f0e22d521461084a578063f2fde38b1461085f578063f8b2cb4f1461087f575b600080fd5b34801561021e57600080fd5b5061023261022d366004612892565b6108b5565b60405190151581526020015b60405180910390f35b34801561025357600080fd5b5061027d6102623660046128b4565b6001600160a01b031660009081526014602052604090205490565b60405190815260200161023e565b34801561029757600080fd5b506102a0610917565b60405161023e919061293c565b3480156102b957600080fd5b5061027d6102c83660046128b4565b6001600160a01b031660009081526010602052604090205490565b3480156102ef57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561032257600080fd5b5061027d6109a9565b34801561033757600080fd5b5061034b61034636600461294f565b6109bf565b005b34801561035957600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561038c57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b3480156103bf57600080fd5b5061034b610cd4565b3480156103d457600080fd5b5061027d6103e33660046128b4565b6001600160a01b03166000908152600e602052604090205490565b34801561040a57600080fd5b5061041e61041936600461294f565b610e92565b60405161023e9190612968565b34801561043757600080fd5b5061034b610f8e565b34801561044c57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561047f57600080fd5b5061034b611929565b34801561049457600080fd5b506104be6104a336600461294f565b6000908152601160205260409020546001600160a01b031690565b6040516001600160a01b03909116815260200161023e565b3480156104e257600080fd5b5061034b611994565b3480156104f757600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b61034b61052c366004612a4e565b611af4565b34801561053d57600080fd5b5060165461027d565b34801561055257600080fd5b5061056661056136600461294f565b611cda565b60405161023e9190612a8a565b34801561057f57600080fd5b506104be61058e36600461294f565b6000908152600760205260409020546001600160a01b031690565b3480156105b557600080fd5b5061034b611de7565b3480156105ca57600080fd5b506105d3611dfb565b60405161023e9190612ad8565b3480156105ec57600080fd5b5060055460ff16610232565b34801561060457600080fd5b5060045461027d565b34801561061957600080fd5b5061034b61062836600461294f565b611e6e565b34801561063957600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561066c57600080fd5b5060025460ff16610232565b34801561068457600080fd5b506104be611ffe565b34801561069957600080fd5b5061027d61200d565b3480156106ae57600080fd5b5061034b6106bd366004612b2f565b61201e565b3480156106ce57600080fd5b5061027d6106dd3660046128b4565b6001600160a01b03166000908152600a602052604090205490565b34801561070457600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561073757600080fd5b5060035461027d565b34801561074c57600080fd5b5061034b61075b366004612b73565b612235565b34801561076c57600080fd5b5061077561250b565b60405161023e9190612bd0565b34801561078e57600080fd5b5061027d61079d3660046128b4565b6001600160a01b031660009081526008602052604090205490565b3480156107c457600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b3480156107f757600080fd5b5061080b610806366004612892565b612574565b60405161023e9190612c1a565b34801561082457600080fd5b50600254610100900460ff16610232565b34801561084157600080fd5b50610232612691565b34801561085657600080fd5b5061027d6126c3565b34801561086b57600080fd5b5061034b61087a3660046128b4565b6126d4565b34801561088b57600080fd5b5061027d61089a3660046128b4565b6001600160a01b031660009081526017602052604090205490565b6000828152600760209081526040808320549051600c926108e2926001600160a01b031691869101612c41565b60408051601f19818403018152908290526108fc91612c5a565b9081526040519081900360200190205460ff16905092915050565b60606001805461092690612c76565b80601f016020809104026020016040519081016040528092919081815260200182805461095290612c76565b801561099f5780601f106109745761010080835404028352916020019161099f565b820191906000526020600020905b81548152906001019060200180831161098257829003601f168201915b5050505050905090565b60006001600d546109ba9190612cc7565b905090565b6109c761274a565b7f00000000000000000000000000000000000000000000000000000000000000004211610a0f5760405162461bcd60e51b8152600401610a0690612cde565b60405180910390fd5b7f00000000000000000000000000000000000000000000000000000000000000004210610a4e5760405162461bcd60e51b8152600401610a0690612d0f565b60125460ff1615610a9b5760405162461bcd60e51b8152602060048201526017602482015276129d5919d95cc8185b1c9958591e481cd95b1958dd1959604a1b6044820152606401610a06565b60025460ff16158015610adb57507f00000000000000000000000000000000000000000000000000000000000000006001600654610ad99190612cc7565b105b15610b6c576002805461ffff191660019081179091555b600654811015610b68576000818152600760209081526040808320546001600160a01b031683526017909152812080547f00000000000000000000000000000000000000000000000000000000000000009290610b50908490612d3e565b90915550819050610b6081612d56565b915050610af2565b5050565b6002805461ffff1916610101179055600654600090610b8d90600190612cc7565b610b979083612d87565b905060015b7f00000000000000000000000000000000000000000000000000000000000000008111610cce576000600781610bd28486612d3e565b815260208082019290925260409081016000908120546001600160a01b03168082526010909352205490915015610c515781610c0d81612d9b565b9250506001600654610c1f9190612cc7565b82610c2a8580612d3e565b610c349190612d3e565b610c3f906001612d3e565b610c499190612d87565b925050610cbc565b6001600654610c609190612cc7565b82610c6b8580612d3e565b610c759190612d3e565b610c7f9190612d87565b6001600160a01b0390911660008181526010602090815260408083208690558583526011909152902080546001600160a01b031916909117905591505b80610cc681612d56565b915050610b9c565b50505b50565b336000908152600a6020526040902054610d1d5760405162461bcd60e51b815260206004820152600a602482015269139bc81c995c5d595cdd60b21b6044820152606401610a06565b7f00000000000000000000000000000000000000000000000000000000000000004211610d815760405162461bcd60e51b8152602060048201526012602482015271151a5b59481a5cc81cdd1a5b1b081b19599d60721b6044820152606401610a06565b336000908152600a602090815260408083208390558051606081018252838152815180840183528481528184019081528183018590526006548552600b845291909320835181546001600160a01b0319166001600160a01b03909116178155905180517f00000000000000000000000000000000000000000000000000000000000000009493610e189260018501929101906127f9565b5060409182015160029091015551600090339083905b60006040518083038185875af1925050503d8060008114610e6b576040519150601f19603f3d011682016040523d82523d6000602084013e610e70565b606091505b5050905080610b6857604051631d42c86760e21b815260040160405180910390fd5b610ebf604051806060016040528060006001600160a01b0316815260200160608152602001600081525090565b6000828152600b602090815260409182902082516060810190935280546001600160a01b031683526001810180549192840191610efb90612c76565b80601f0160208091040260200160405190810160405280929190818152602001828054610f2790612c76565b8015610f745780601f10610f4957610100808354040283529160200191610f74565b820191906000526020600020905b815481529060010190602001808311610f5757829003601f168201915b505050505081526020016002820154815250509050919050565b7f00000000000000000000000000000000000000000000000000000000000000004211610ff55760405162461bcd60e51b8152602060048201526015602482015274129d5919da5b99c81b9bdd08195b991959081e595d605a1b6044820152606401610a06565b60055460ff161561103d5760405162461bcd60e51b8152602060048201526012602482015271105b1c9958591e48199d5b1b199a5b1b195960721b6044820152606401610a06565b60025460ff166110cf576002805461ffff191660019081179091555b600654811015610cd1576000818152600760209081526040808320546001600160a01b031683526017909152812080547f000000000000000000000000000000000000000000000000000000000000000092906110b7908490612d3e565b909155508190506110c781612d56565b915050611059565b6005805460ff191660019081179091555b7f000000000000000000000000000000000000000000000000000000000000000081116111c9576001600d546111169190612cc7565b6000828152601160209081526040808320546001600160a01b03168352601490915290205414156111b7576040805180820190915281815260006020820181815260158054600181018255925291517f55f448fdea98c4d29eb340757ef0a66cd03dbb9538908a6a81d96026b71ec47560029092029182015590517f55f448fdea98c4d29eb340757ef0a66cd03dbb9538908a6a81d96026b71ec476909101555b806111c181612d56565b9150506110e0565b506015546112ba57600060016006546111e29190612cc7565b61122c7f00000000000000000000000000000000000000000000000000000000000000007f0000000000000000000000000000000000000000000000000000000000000000612d3e565b6112369190612db2565b905060015b600654811015610b68576000818152600760209081526040808320546001600160a01b0316835260109091529020546112a8576000818152600760209081526040808320546001600160a01b031683526017909152812080548492906112a2908490612d3e565b90915550505b806112b281612d56565b91505061123b565b6015546000906112cb906064612dc6565b6113157f00000000000000000000000000000000000000000000000000000000000000007f0000000000000000000000000000000000000000000000000000000000000000612dc6565b61131f9190612db2565b6015549091506000906113329083612dc6565b60016006546113419190612cc7565b61136b907f0000000000000000000000000000000000000000000000000000000000000000612dc6565b6113759190612cc7565b905060005b60155481101561144457826015828154811061139857611398612de5565b906000526020600020906002020160010181905550826017600060116000601586815481106113c9576113c9612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600082825461142c9190612d3e565b9091555081905061143c81612d56565b91505061137a565b5060015b600d548110156115475761147d60027f0000000000000000000000000000000000000000000000000000000000000000612db2565b6000828152600f60205260409020600301541115611535576000818152600f602052604081206002015460048054919290916114ba908490612d3e565b90915550506040805180820190915281815260006020820181815260168054600181018255925291517fd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b512428960029092029182015590517fd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b512428a909101555b8061153f81612d56565b915050611448565b5060165461169957600060016006546115609190612cc7565b61156a9083612db2565b905060005b601554811015611610578160176000601160006015868154811061159557611595612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008282546115f89190612d3e565b9091555081905061160881612d56565b91505061156f565b5060015b600654811015611693576000818152600760209081526040808320546001600160a01b031683526010909152902054611681576000818152600760209081526040808320546001600160a01b0316835260179091528120805484929061167b908490612d3e565b90915550505b8061168b81612d56565b915050611614565b50505050565b600081600454106116b957816004546116b29190612cc7565b9050600091505b60005b6016548110156117d7576000600f6000601684815481106116df576116df612de5565b9060005260206000209060020201600001548152602001908152602001600020600201549050600060045484836117169190612dc6565b6117209190612db2565b61172a9083612cc7565b9050806016848154811061174057611740612de5565b9060005260206000209060020201600101819055508060176000600f60006016888154811061177157611771612de5565b6000918252602080832060029092029091015483528281019390935260409182018120546001600160a01b03168452918301939093529101812080549091906117bb908490612d3e565b92505081905550505080806117cf90612d56565b9150506116bc565b508115610cce57600060016006546117ef9190612cc7565b6117f99084612db2565b905060005b60155481101561189f578160176000601160006015868154811061182457611824612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008282546118879190612d3e565b9091555081905061189781612d56565b9150506117fe565b5060015b600654811015611922576000818152600760209081526040808320546001600160a01b031683526010909152902054611910576000818152600760209081526040808320546001600160a01b0316835260179091528120805484929061190a908490612d3e565b90915550505b8061191a81612d56565b9150506118a3565b5050505050565b336000908152601760205260409020546119725760405162461bcd60e51b815260206004820152600a6024820152694e6f2062616c616e636560b01b6044820152606401610a06565b3360008181526017602052604080822080549083905590519092908390610e2e565b7f000000000000000000000000000000000000000000000000000000000000000042106119d35760405162461bcd60e51b8152600401610a0690612dfb565b3360009081526008602052604090205415611a235760405162461bcd60e51b815260206004820152601060248201526f20b63932b0b23c90309036b2b6b132b960811b6044820152606401610a06565b6001600654611a329190612cc7565b336000908152600a60209081526040808320548352600b90915290206002015414611aab5760405162461bcd60e51b8152602060048201526024808201527f4e6f7420616c6c206d656d6265727320616363657074656420746865207265716044820152631d595cdd60e21b6064820152608401610a06565b60068054600090815260076020908152604080832080546001600160a01b031916339081179091558454908452600890925282208190559190611aed83612d56565b9190505550565b7f00000000000000000000000000000000000000000000000000000000000000003414611b5f5760405162461bcd60e51b8152602060048201526019602482015278105b5bdd5b9d081cd95b9d081a5cdb89dd0818dbdc9c9958dd603a1b6044820152606401610a06565b7f00000000000000000000000000000000000000000000000000000000000000004210611b9e5760405162461bcd60e51b8152600401610a0690612dfb565b3360009081526008602052604090205415611bf35760405162461bcd60e51b81526020600482015260156024820152744d656d62657220616c72656164792065786973747360581b6044820152606401610a06565b336000908152600a602052604090205415611c495760405162461bcd60e51b81526020600482015260166024820152755265717565737420616c72656164792065786973747360501b6044820152606401610a06565b60408051606081018252338152602080820184815260008385018190526009548152600b835293909320825181546001600160a01b0319166001600160a01b0390911617815592518051929392611ca692600185019201906127f9565b5060409182015160029091015560098054336000908152600a60205292832081905591611cd283612d56565b919050555050565b611d0e604051806080016040528060006001600160a01b031681526020016060815260200160008152602001600081525090565b6000828152600f602090815260409182902082516080810190935280546001600160a01b031683526001810180549192840191611d4a90612c76565b80601f0160208091040260200160405190810160405280929190818152602001828054611d7690612c76565b8015611dc35780601f10611d9857610100808354040283529160200191611dc3565b820191906000526020600020905b815481529060010190602001808311611da657829003601f168201915b50505050508152602001600282015481526020016003820154815250509050919050565b611def61274a565b611df960006127a9565b565b60606015805480602002602001604051908101604052809291908181526020016000905b82821015611e6557838290600052602060002090600202016040518060400160405290816000820154815260200160018201548152505081526020019060010190611e1f565b50505050905090565b33600090815260086020526040902054611e9a5760405162461bcd60e51b8152600401610a0690612e3d565b6000818152600b60205260409020546001600160a01b0316611ef75760405162461bcd60e51b815260206004820152601660248201527514995c5d595cdd08191bd95cc81b9bdd08195e1a5cdd60521b6044820152606401610a06565b600c3382604051602001611f0c929190612c41565b60408051601f1981840301815290829052611f2691612c5a565b9081526040519081900360200190205460ff1615611f795760405162461bcd60e51b815260206004820152601060248201526f105b1c9958591e481858d8d95c1d195960821b6044820152606401610a06565b6001600c3383604051602001611f90929190612c41565b60408051601f1981840301815290829052611faa91612c5a565b908152602001604051809103902060006101000a81548160ff0219169083151502179055506001600b60008381526020019081526020016000206002016000828254611ff69190612d3e565b909155505050565b6000546001600160a01b031690565b600060016006546109ba9190612cc7565b7f0000000000000000000000000000000000000000000000000000000000000000421061208d5760405162461bcd60e51b815260206004820152601d60248201527f436f6e7472616374206973206e6f742076616c696420616e796d6f72650000006044820152606401610a06565b7f000000000000000000000000000000000000000000000000000000000000000042106120f65760405162461bcd60e51b8152602060048201526017602482015276129d5919da5b99c8185b1c9958591e481cdd185c9d1959604a1b6044820152606401610a06565b336000908152600860205260409020546121225760405162461bcd60e51b8152600401610a0690612e3d565b336000908152600e60205260409020541561217a5760405162461bcd60e51b8152602060048201526018602482015277496e737572616e636520616c72656164792065786973747360401b6044820152606401610a06565b600d54336000818152600e60209081526040808320859055805160808101825293845283820187815284820187905260608501849052948352600f8252909120825181546001600160a01b0319166001600160a01b03909116178155925180519293926121ed92600185019201906127f9565b50604082015181600201556060820151816003015590505080600360008282546122179190612d3e565b9091555050600d805490600061222c83612d56565b91905055505050565b7f000000000000000000000000000000000000000000000000000000000000000042116122745760405162461bcd60e51b8152600401610a0690612cde565b7f000000000000000000000000000000000000000000000000000000000000000042106122b35760405162461bcd60e51b8152600401610a0690612d0f565b336000908152601060205260409020546122fd5760405162461bcd60e51b815260206004820152600b60248201526a4e6f742061206a7564676560a81b6044820152606401610a06565b6000838152600f60205260409020546001600160a01b031661235c5760405162461bcd60e51b8152602060048201526018602482015277125b9cdd5c985b98d948191bd95cc81b9bdd08195e1a5cdd60421b6044820152606401610a06565b60133384604051602001612371929190612c41565b60408051601f198184030181529082905261238b91612c5a565b9081526040519081900360200190205460ff161580156123aa57508051155b6123e85760405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e481d5c19185d1959608a1b6044820152606401610a06565b816124315780516124315760405162461bcd60e51b8152602060048201526013602482015272526561736f6e2075726920697320656d70747960681b6044820152606401610a06565b60405180604001604052808315158152602001828152506013338560405160200161245d929190612c41565b60408051601f198184030181529082905261247791612c5a565b908152604051602091819003820190208251815460ff191690151517815582820151805191926124af926001850192909101906127f9565b5090505081156124e1576000838152600f602052604081206003018054600192906124db908490612d3e565b90915550505b336000908152601460205260408120805460019290612501908490612d3e565b9091555050505050565b606060168054806020026020016040519081016040528092919081815260200160009082821015611e6557838290600052602060002090600202016040518060400160405290816000820154815260200160018201548152505081526020019060010190611e1f565b6040805180820190915260008152606060208201526000838152601160209081526040918290205491516013926125b9926001600160a01b0390911691869101612c41565b60408051601f19818403018152908290526125d391612c5a565b908152604080519182900360209081018320838301909252815460ff16151583526001820180549184019161260790612c76565b80601f016020809104026020016040519081016040528092919081815260200182805461263390612c76565b80156126805780601f1061265557610100808354040283529160200191612680565b820191906000526020600020905b81548152906001019060200180831161266357829003601f168201915b505050505081525050905092915050565b60007f00000000000000000000000000000000000000000000000000000000000000006126bc61200d565b1015905090565b600060016009546109ba9190612cc7565b6126dc61274a565b6001600160a01b0381166127415760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610a06565b610cd1816127a9565b33612753611ffe565b6001600160a01b031614611df95760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610a06565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b82805461280590612c76565b90600052602060002090601f016020900481019282612827576000855561286d565b82601f1061284057805160ff191683800117855561286d565b8280016001018555821561286d579182015b8281111561286d578251825591602001919060010190612852565b5061287992915061287d565b5090565b5b80821115612879576000815560010161287e565b600080604083850312156128a557600080fd5b50508035926020909101359150565b6000602082840312156128c657600080fd5b81356001600160a01b03811681146128dd57600080fd5b9392505050565b60005b838110156128ff5781810151838201526020016128e7565b838111156116935750506000910152565b600081518084526129288160208601602086016128e4565b601f01601f19169290920160200192915050565b6020815260006128dd6020830184612910565b60006020828403121561296157600080fd5b5035919050565b602080825282516001600160a01b031682820152820151606060408301526000906129966080840182612910565b9050604084015160608401528091505092915050565b634e487b7160e01b600052604160045260246000fd5b600082601f8301126129d357600080fd5b81356001600160401b03808211156129ed576129ed6129ac565b604051601f8301601f19908116603f01168101908282118183101715612a1557612a156129ac565b81604052838152866020858801011115612a2e57600080fd5b836020870160208301376000602085830101528094505050505092915050565b600060208284031215612a6057600080fd5b81356001600160401b03811115612a7657600080fd5b612a82848285016129c2565b949350505050565b602080825282516001600160a01b03168282015282015160806040830152600090612ab860a0840182612910565b905060408401516060840152606084015160808401528091505092915050565b602080825282518282018190526000919060409081850190868401855b82811015612b2257612b1284835180518252602090810151910152565b9284019290850190600101612af5565b5091979650505050505050565b60008060408385031215612b4257600080fd5b82356001600160401b03811115612b5857600080fd5b612b64858286016129c2565b95602094909401359450505050565b600080600060608486031215612b8857600080fd5b8335925060208401358015158114612b9f57600080fd5b915060408401356001600160401b03811115612bba57600080fd5b612bc6868287016129c2565b9150509250925092565b602080825282518282018190526000919060409081850190868401855b82811015612b2257612c0a84835180518252602090810151910152565b9284019290850190600101612bed565b6020815281511515602082015260006020830151604080840152612a826060840182612910565b6001600160a01b03929092168252602082015260400190565b60008251612c6c8184602087016128e4565b9190910192915050565b600181811c90821680612c8a57607f821691505b60208210811415612cab57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052601160045260246000fd5b600082821015612cd957612cd9612cb1565b500390565b602080825260179082015276129d5919da5b99c81b9bdd081cdd185c9d1959081e595d604a1b604082015260600190565b602080825260159082015274129d5919da5b99c8185b1c9958591e48195b991959605a1b604082015260600190565b60008219821115612d5157612d51612cb1565b500190565b6000600019821415612d6a57612d6a612cb1565b5060010190565b634e487b7160e01b600052601260045260246000fd5b600082612d9657612d96612d71565b500690565b600081612daa57612daa612cb1565b506000190190565b600082612dc157612dc1612d71565b500490565b6000816000190483118215151615612de057612de0612cb1565b500290565b634e487b7160e01b600052603260045260246000fd5b60208082526022908201527f416464696e67206d656d626572206973206e6f742076616c696420616e796d6f604082015261726560f01b606082015260800190565b6020808252600c908201526b2737ba10309036b2b6b132b960a11b60408201526060019056fea2646970667358221220825647a313c8ef3d91cf2436a6b0f21219c069d6b59e97de3cc277cc4129f2c664736f6c634300080c00334275726679496e737572616e63653a206a75646765734c656e6774682073686f4275726679496e737572616e63653a2070657263656e74446976696465496e74",
+  "deployedBytecode": "0x60806040526004361061020d5760003560e01c8063071694fb146102125780630a4b5162146102475780630cac36b21461028b57806313284cdd146102ad578063134fe304146102e357806316daa23b146103165780631a9d78791461032b5780631e1e94991461034d578063201095b71461038057806321e3ca5d146103b3578063253ecfcf146103c857806326757b73146103fe5780632ddfd9281461042b5780633b7f7cfa146104405780633ccfd60b146104735780633e035c78146104885780633f952091146104d65780634340b213146104eb5780634c6ee3821461051e5780635ee8906d1461053157806365b21d14146105465780636f80886c14610573578063715018a6146105a95780637248f579146105be57806379ee10b0146105e05780637d4b1a5f146105f85780638170aff01461060d5780638618e9d31461062d5780638c9a92a2146106605780638da5cb5b146106785780638f1803051461068d578063a095f2b4146106a2578063b0118f4a14610660578063b035d6e1146106c2578063b7e44ba4146106f8578063bfbdef7e1461072b578063c864b70e14610740578063cf1dd2b414610760578063cfdd1ce314610782578063d321fe29146107b8578063e12c2d91146107eb578063e57384db14610818578063ed3ee1de14610835578063f0e22d521461084a578063f2fde38b1461085f578063f8b2cb4f1461087f575b600080fd5b34801561021e57600080fd5b5061023261022d366004612892565b6108b5565b60405190151581526020015b60405180910390f35b34801561025357600080fd5b5061027d6102623660046128b4565b6001600160a01b031660009081526014602052604090205490565b60405190815260200161023e565b34801561029757600080fd5b506102a0610917565b60405161023e919061293c565b3480156102b957600080fd5b5061027d6102c83660046128b4565b6001600160a01b031660009081526010602052604090205490565b3480156102ef57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561032257600080fd5b5061027d6109a9565b34801561033757600080fd5b5061034b61034636600461294f565b6109bf565b005b34801561035957600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561038c57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b3480156103bf57600080fd5b5061034b610cd4565b3480156103d457600080fd5b5061027d6103e33660046128b4565b6001600160a01b03166000908152600e602052604090205490565b34801561040a57600080fd5b5061041e61041936600461294f565b610e92565b60405161023e9190612968565b34801561043757600080fd5b5061034b610f8e565b34801561044c57600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561047f57600080fd5b5061034b611929565b34801561049457600080fd5b506104be6104a336600461294f565b6000908152601160205260409020546001600160a01b031690565b6040516001600160a01b03909116815260200161023e565b3480156104e257600080fd5b5061034b611994565b3480156104f757600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b61034b61052c366004612a4e565b611af4565b34801561053d57600080fd5b5060165461027d565b34801561055257600080fd5b5061056661056136600461294f565b611cda565b60405161023e9190612a8a565b34801561057f57600080fd5b506104be61058e36600461294f565b6000908152600760205260409020546001600160a01b031690565b3480156105b557600080fd5b5061034b611de7565b3480156105ca57600080fd5b506105d3611dfb565b60405161023e9190612ad8565b3480156105ec57600080fd5b5060055460ff16610232565b34801561060457600080fd5b5060045461027d565b34801561061957600080fd5b5061034b61062836600461294f565b611e6e565b34801561063957600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561066c57600080fd5b5060025460ff16610232565b34801561068457600080fd5b506104be611ffe565b34801561069957600080fd5b5061027d61200d565b3480156106ae57600080fd5b5061034b6106bd366004612b2f565b61201e565b3480156106ce57600080fd5b5061027d6106dd3660046128b4565b6001600160a01b03166000908152600a602052604090205490565b34801561070457600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b34801561073757600080fd5b5060035461027d565b34801561074c57600080fd5b5061034b61075b366004612b73565b612235565b34801561076c57600080fd5b5061077561250b565b60405161023e9190612bd0565b34801561078e57600080fd5b5061027d61079d3660046128b4565b6001600160a01b031660009081526008602052604090205490565b3480156107c457600080fd5b507f000000000000000000000000000000000000000000000000000000000000000061027d565b3480156107f757600080fd5b5061080b610806366004612892565b612574565b60405161023e9190612c1a565b34801561082457600080fd5b50600254610100900460ff16610232565b34801561084157600080fd5b50610232612691565b34801561085657600080fd5b5061027d6126c3565b34801561086b57600080fd5b5061034b61087a3660046128b4565b6126d4565b34801561088b57600080fd5b5061027d61089a3660046128b4565b6001600160a01b031660009081526017602052604090205490565b6000828152600760209081526040808320549051600c926108e2926001600160a01b031691869101612c41565b60408051601f19818403018152908290526108fc91612c5a565b9081526040519081900360200190205460ff16905092915050565b60606001805461092690612c76565b80601f016020809104026020016040519081016040528092919081815260200182805461095290612c76565b801561099f5780601f106109745761010080835404028352916020019161099f565b820191906000526020600020905b81548152906001019060200180831161098257829003601f168201915b5050505050905090565b60006001600d546109ba9190612cc7565b905090565b6109c761274a565b7f00000000000000000000000000000000000000000000000000000000000000004211610a0f5760405162461bcd60e51b8152600401610a0690612cde565b60405180910390fd5b7f00000000000000000000000000000000000000000000000000000000000000004210610a4e5760405162461bcd60e51b8152600401610a0690612d0f565b60125460ff1615610a9b5760405162461bcd60e51b8152602060048201526017602482015276129d5919d95cc8185b1c9958591e481cd95b1958dd1959604a1b6044820152606401610a06565b60025460ff16158015610adb57507f00000000000000000000000000000000000000000000000000000000000000006001600654610ad99190612cc7565b105b15610b6c576002805461ffff191660019081179091555b600654811015610b68576000818152600760209081526040808320546001600160a01b031683526017909152812080547f00000000000000000000000000000000000000000000000000000000000000009290610b50908490612d3e565b90915550819050610b6081612d56565b915050610af2565b5050565b6002805461ffff1916610101179055600654600090610b8d90600190612cc7565b610b979083612d87565b905060015b7f00000000000000000000000000000000000000000000000000000000000000008111610cce576000600781610bd28486612d3e565b815260208082019290925260409081016000908120546001600160a01b03168082526010909352205490915015610c515781610c0d81612d9b565b9250506001600654610c1f9190612cc7565b82610c2a8580612d3e565b610c349190612d3e565b610c3f906001612d3e565b610c499190612d87565b925050610cbc565b6001600654610c609190612cc7565b82610c6b8580612d3e565b610c759190612d3e565b610c7f9190612d87565b6001600160a01b0390911660008181526010602090815260408083208690558583526011909152902080546001600160a01b031916909117905591505b80610cc681612d56565b915050610b9c565b50505b50565b336000908152600a6020526040902054610d1d5760405162461bcd60e51b815260206004820152600a602482015269139bc81c995c5d595cdd60b21b6044820152606401610a06565b7f00000000000000000000000000000000000000000000000000000000000000004211610d815760405162461bcd60e51b8152602060048201526012602482015271151a5b59481a5cc81cdd1a5b1b081b19599d60721b6044820152606401610a06565b336000908152600a602090815260408083208390558051606081018252838152815180840183528481528184019081528183018590526006548552600b845291909320835181546001600160a01b0319166001600160a01b03909116178155905180517f00000000000000000000000000000000000000000000000000000000000000009493610e189260018501929101906127f9565b5060409182015160029091015551600090339083905b60006040518083038185875af1925050503d8060008114610e6b576040519150601f19603f3d011682016040523d82523d6000602084013e610e70565b606091505b5050905080610b6857604051631d42c86760e21b815260040160405180910390fd5b610ebf604051806060016040528060006001600160a01b0316815260200160608152602001600081525090565b6000828152600b602090815260409182902082516060810190935280546001600160a01b031683526001810180549192840191610efb90612c76565b80601f0160208091040260200160405190810160405280929190818152602001828054610f2790612c76565b8015610f745780601f10610f4957610100808354040283529160200191610f74565b820191906000526020600020905b815481529060010190602001808311610f5757829003601f168201915b505050505081526020016002820154815250509050919050565b7f00000000000000000000000000000000000000000000000000000000000000004211610ff55760405162461bcd60e51b8152602060048201526015602482015274129d5919da5b99c81b9bdd08195b991959081e595d605a1b6044820152606401610a06565b60055460ff161561103d5760405162461bcd60e51b8152602060048201526012602482015271105b1c9958591e48199d5b1b199a5b1b195960721b6044820152606401610a06565b60025460ff166110cf576002805461ffff191660019081179091555b600654811015610cd1576000818152600760209081526040808320546001600160a01b031683526017909152812080547f000000000000000000000000000000000000000000000000000000000000000092906110b7908490612d3e565b909155508190506110c781612d56565b915050611059565b6005805460ff191660019081179091555b7f000000000000000000000000000000000000000000000000000000000000000081116111c9576001600d546111169190612cc7565b6000828152601160209081526040808320546001600160a01b03168352601490915290205414156111b7576040805180820190915281815260006020820181815260158054600181018255925291517f55f448fdea98c4d29eb340757ef0a66cd03dbb9538908a6a81d96026b71ec47560029092029182015590517f55f448fdea98c4d29eb340757ef0a66cd03dbb9538908a6a81d96026b71ec476909101555b806111c181612d56565b9150506110e0565b506015546112ba57600060016006546111e29190612cc7565b61122c7f00000000000000000000000000000000000000000000000000000000000000007f0000000000000000000000000000000000000000000000000000000000000000612d3e565b6112369190612db2565b905060015b600654811015610b68576000818152600760209081526040808320546001600160a01b0316835260109091529020546112a8576000818152600760209081526040808320546001600160a01b031683526017909152812080548492906112a2908490612d3e565b90915550505b806112b281612d56565b91505061123b565b6015546000906112cb906064612dc6565b6113157f00000000000000000000000000000000000000000000000000000000000000007f0000000000000000000000000000000000000000000000000000000000000000612dc6565b61131f9190612db2565b6015549091506000906113329083612dc6565b60016006546113419190612cc7565b61136b907f0000000000000000000000000000000000000000000000000000000000000000612dc6565b6113759190612cc7565b905060005b60155481101561144457826015828154811061139857611398612de5565b906000526020600020906002020160010181905550826017600060116000601586815481106113c9576113c9612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600082825461142c9190612d3e565b9091555081905061143c81612d56565b91505061137a565b5060015b600d548110156115475761147d60027f0000000000000000000000000000000000000000000000000000000000000000612db2565b6000828152600f60205260409020600301541115611535576000818152600f602052604081206002015460048054919290916114ba908490612d3e565b90915550506040805180820190915281815260006020820181815260168054600181018255925291517fd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b512428960029092029182015590517fd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b512428a909101555b8061153f81612d56565b915050611448565b5060165461169957600060016006546115609190612cc7565b61156a9083612db2565b905060005b601554811015611610578160176000601160006015868154811061159557611595612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008282546115f89190612d3e565b9091555081905061160881612d56565b91505061156f565b5060015b600654811015611693576000818152600760209081526040808320546001600160a01b031683526010909152902054611681576000818152600760209081526040808320546001600160a01b0316835260179091528120805484929061167b908490612d3e565b90915550505b8061168b81612d56565b915050611614565b50505050565b600081600454106116b957816004546116b29190612cc7565b9050600091505b60005b6016548110156117d7576000600f6000601684815481106116df576116df612de5565b9060005260206000209060020201600001548152602001908152602001600020600201549050600060045484836117169190612dc6565b6117209190612db2565b61172a9083612cc7565b9050806016848154811061174057611740612de5565b9060005260206000209060020201600101819055508060176000600f60006016888154811061177157611771612de5565b6000918252602080832060029092029091015483528281019390935260409182018120546001600160a01b03168452918301939093529101812080549091906117bb908490612d3e565b92505081905550505080806117cf90612d56565b9150506116bc565b508115610cce57600060016006546117ef9190612cc7565b6117f99084612db2565b905060005b60155481101561189f578160176000601160006015868154811061182457611824612de5565b906000526020600020906002020160000154815260200190815260200160002060009054906101000a90046001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008282546118879190612d3e565b9091555081905061189781612d56565b9150506117fe565b5060015b600654811015611922576000818152600760209081526040808320546001600160a01b031683526010909152902054611910576000818152600760209081526040808320546001600160a01b0316835260179091528120805484929061190a908490612d3e565b90915550505b8061191a81612d56565b9150506118a3565b5050505050565b336000908152601760205260409020546119725760405162461bcd60e51b815260206004820152600a6024820152694e6f2062616c616e636560b01b6044820152606401610a06565b3360008181526017602052604080822080549083905590519092908390610e2e565b7f000000000000000000000000000000000000000000000000000000000000000042106119d35760405162461bcd60e51b8152600401610a0690612dfb565b3360009081526008602052604090205415611a235760405162461bcd60e51b815260206004820152601060248201526f20b63932b0b23c90309036b2b6b132b960811b6044820152606401610a06565b6001600654611a329190612cc7565b336000908152600a60209081526040808320548352600b90915290206002015414611aab5760405162461bcd60e51b8152602060048201526024808201527f4e6f7420616c6c206d656d6265727320616363657074656420746865207265716044820152631d595cdd60e21b6064820152608401610a06565b60068054600090815260076020908152604080832080546001600160a01b031916339081179091558454908452600890925282208190559190611aed83612d56565b9190505550565b7f00000000000000000000000000000000000000000000000000000000000000003414611b5f5760405162461bcd60e51b8152602060048201526019602482015278105b5bdd5b9d081cd95b9d081a5cdb89dd0818dbdc9c9958dd603a1b6044820152606401610a06565b7f00000000000000000000000000000000000000000000000000000000000000004210611b9e5760405162461bcd60e51b8152600401610a0690612dfb565b3360009081526008602052604090205415611bf35760405162461bcd60e51b81526020600482015260156024820152744d656d62657220616c72656164792065786973747360581b6044820152606401610a06565b336000908152600a602052604090205415611c495760405162461bcd60e51b81526020600482015260166024820152755265717565737420616c72656164792065786973747360501b6044820152606401610a06565b60408051606081018252338152602080820184815260008385018190526009548152600b835293909320825181546001600160a01b0319166001600160a01b0390911617815592518051929392611ca692600185019201906127f9565b5060409182015160029091015560098054336000908152600a60205292832081905591611cd283612d56565b919050555050565b611d0e604051806080016040528060006001600160a01b031681526020016060815260200160008152602001600081525090565b6000828152600f602090815260409182902082516080810190935280546001600160a01b031683526001810180549192840191611d4a90612c76565b80601f0160208091040260200160405190810160405280929190818152602001828054611d7690612c76565b8015611dc35780601f10611d9857610100808354040283529160200191611dc3565b820191906000526020600020905b815481529060010190602001808311611da657829003601f168201915b50505050508152602001600282015481526020016003820154815250509050919050565b611def61274a565b611df960006127a9565b565b60606015805480602002602001604051908101604052809291908181526020016000905b82821015611e6557838290600052602060002090600202016040518060400160405290816000820154815260200160018201548152505081526020019060010190611e1f565b50505050905090565b33600090815260086020526040902054611e9a5760405162461bcd60e51b8152600401610a0690612e3d565b6000818152600b60205260409020546001600160a01b0316611ef75760405162461bcd60e51b815260206004820152601660248201527514995c5d595cdd08191bd95cc81b9bdd08195e1a5cdd60521b6044820152606401610a06565b600c3382604051602001611f0c929190612c41565b60408051601f1981840301815290829052611f2691612c5a565b9081526040519081900360200190205460ff1615611f795760405162461bcd60e51b815260206004820152601060248201526f105b1c9958591e481858d8d95c1d195960821b6044820152606401610a06565b6001600c3383604051602001611f90929190612c41565b60408051601f1981840301815290829052611faa91612c5a565b908152602001604051809103902060006101000a81548160ff0219169083151502179055506001600b60008381526020019081526020016000206002016000828254611ff69190612d3e565b909155505050565b6000546001600160a01b031690565b600060016006546109ba9190612cc7565b7f0000000000000000000000000000000000000000000000000000000000000000421061208d5760405162461bcd60e51b815260206004820152601d60248201527f436f6e7472616374206973206e6f742076616c696420616e796d6f72650000006044820152606401610a06565b7f000000000000000000000000000000000000000000000000000000000000000042106120f65760405162461bcd60e51b8152602060048201526017602482015276129d5919da5b99c8185b1c9958591e481cdd185c9d1959604a1b6044820152606401610a06565b336000908152600860205260409020546121225760405162461bcd60e51b8152600401610a0690612e3d565b336000908152600e60205260409020541561217a5760405162461bcd60e51b8152602060048201526018602482015277496e737572616e636520616c72656164792065786973747360401b6044820152606401610a06565b600d54336000818152600e60209081526040808320859055805160808101825293845283820187815284820187905260608501849052948352600f8252909120825181546001600160a01b0319166001600160a01b03909116178155925180519293926121ed92600185019201906127f9565b50604082015181600201556060820151816003015590505080600360008282546122179190612d3e565b9091555050600d805490600061222c83612d56565b91905055505050565b7f000000000000000000000000000000000000000000000000000000000000000042116122745760405162461bcd60e51b8152600401610a0690612cde565b7f000000000000000000000000000000000000000000000000000000000000000042106122b35760405162461bcd60e51b8152600401610a0690612d0f565b336000908152601060205260409020546122fd5760405162461bcd60e51b815260206004820152600b60248201526a4e6f742061206a7564676560a81b6044820152606401610a06565b6000838152600f60205260409020546001600160a01b031661235c5760405162461bcd60e51b8152602060048201526018602482015277125b9cdd5c985b98d948191bd95cc81b9bdd08195e1a5cdd60421b6044820152606401610a06565b60133384604051602001612371929190612c41565b60408051601f198184030181529082905261238b91612c5a565b9081526040519081900360200190205460ff161580156123aa57508051155b6123e85760405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e481d5c19185d1959608a1b6044820152606401610a06565b816124315780516124315760405162461bcd60e51b8152602060048201526013602482015272526561736f6e2075726920697320656d70747960681b6044820152606401610a06565b60405180604001604052808315158152602001828152506013338560405160200161245d929190612c41565b60408051601f198184030181529082905261247791612c5a565b908152604051602091819003820190208251815460ff191690151517815582820151805191926124af926001850192909101906127f9565b5090505081156124e1576000838152600f602052604081206003018054600192906124db908490612d3e565b90915550505b336000908152601460205260408120805460019290612501908490612d3e565b9091555050505050565b606060168054806020026020016040519081016040528092919081815260200160009082821015611e6557838290600052602060002090600202016040518060400160405290816000820154815260200160018201548152505081526020019060010190611e1f565b6040805180820190915260008152606060208201526000838152601160209081526040918290205491516013926125b9926001600160a01b0390911691869101612c41565b60408051601f19818403018152908290526125d391612c5a565b908152604080519182900360209081018320838301909252815460ff16151583526001820180549184019161260790612c76565b80601f016020809104026020016040519081016040528092919081815260200182805461263390612c76565b80156126805780601f1061265557610100808354040283529160200191612680565b820191906000526020600020905b81548152906001019060200180831161266357829003601f168201915b505050505081525050905092915050565b60007f00000000000000000000000000000000000000000000000000000000000000006126bc61200d565b1015905090565b600060016009546109ba9190612cc7565b6126dc61274a565b6001600160a01b0381166127415760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610a06565b610cd1816127a9565b33612753611ffe565b6001600160a01b031614611df95760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610a06565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b82805461280590612c76565b90600052602060002090601f016020900481019282612827576000855561286d565b82601f1061284057805160ff191683800117855561286d565b8280016001018555821561286d579182015b8281111561286d578251825591602001919060010190612852565b5061287992915061287d565b5090565b5b80821115612879576000815560010161287e565b600080604083850312156128a557600080fd5b50508035926020909101359150565b6000602082840312156128c657600080fd5b81356001600160a01b03811681146128dd57600080fd5b9392505050565b60005b838110156128ff5781810151838201526020016128e7565b838111156116935750506000910152565b600081518084526129288160208601602086016128e4565b601f01601f19169290920160200192915050565b6020815260006128dd6020830184612910565b60006020828403121561296157600080fd5b5035919050565b602080825282516001600160a01b031682820152820151606060408301526000906129966080840182612910565b9050604084015160608401528091505092915050565b634e487b7160e01b600052604160045260246000fd5b600082601f8301126129d357600080fd5b81356001600160401b03808211156129ed576129ed6129ac565b604051601f8301601f19908116603f01168101908282118183101715612a1557612a156129ac565b81604052838152866020858801011115612a2e57600080fd5b836020870160208301376000602085830101528094505050505092915050565b600060208284031215612a6057600080fd5b81356001600160401b03811115612a7657600080fd5b612a82848285016129c2565b949350505050565b602080825282516001600160a01b03168282015282015160806040830152600090612ab860a0840182612910565b905060408401516060840152606084015160808401528091505092915050565b602080825282518282018190526000919060409081850190868401855b82811015612b2257612b1284835180518252602090810151910152565b9284019290850190600101612af5565b5091979650505050505050565b60008060408385031215612b4257600080fd5b82356001600160401b03811115612b5857600080fd5b612b64858286016129c2565b95602094909401359450505050565b600080600060608486031215612b8857600080fd5b8335925060208401358015158114612b9f57600080fd5b915060408401356001600160401b03811115612bba57600080fd5b612bc6868287016129c2565b9150509250925092565b602080825282518282018190526000919060409081850190868401855b82811015612b2257612c0a84835180518252602090810151910152565b9284019290850190600101612bed565b6020815281511515602082015260006020830151604080840152612a826060840182612910565b6001600160a01b03929092168252602082015260400190565b60008251612c6c8184602087016128e4565b9190910192915050565b600181811c90821680612c8a57607f821691505b60208210811415612cab57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052601160045260246000fd5b600082821015612cd957612cd9612cb1565b500390565b602080825260179082015276129d5919da5b99c81b9bdd081cdd185c9d1959081e595d604a1b604082015260600190565b602080825260159082015274129d5919da5b99c8185b1c9958591e48195b991959605a1b604082015260600190565b60008219821115612d5157612d51612cb1565b500190565b6000600019821415612d6a57612d6a612cb1565b5060010190565b634e487b7160e01b600052601260045260246000fd5b600082612d9657612d96612d71565b500690565b600081612daa57612daa612cb1565b506000190190565b600082612dc157612dc1612d71565b500490565b6000816000190483118215151615612de057612de0612cb1565b500290565b634e487b7160e01b600052603260045260246000fd5b60208082526022908201527f416464696e67206d656d626572206973206e6f742076616c696420616e796d6f604082015261726560f01b606082015260800190565b6020808252600c908201526b2737ba10309036b2b6b132b960a11b60408201526060019056fea2646970667358221220825647a313c8ef3d91cf2436a6b0f21219c069d6b59e97de3cc277cc4129f2c664736f6c634300080c0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 219,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 774,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_baseUri",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 792,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_isMinMembersReachedCalculated",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_bool"
+      },
+      {
+        "astId": 794,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_isMinMembersReached",
+        "offset": 1,
+        "slot": "2",
+        "type": "t_bool"
+      },
+      {
+        "astId": 796,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_totalClaimAmountRequested",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 798,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_totalClaimAmountAccepted",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 800,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_isFinalJudgementCalculated",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_bool"
+      },
+      {
+        "astId": 803,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_memberNumber",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 807,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_idToMemberAddress",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_mapping(t_uint256,t_address)"
+      },
+      {
+        "astId": 811,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_addressToMemberId",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 814,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_requestNumber",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 818,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_addressToRequestId",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 823,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_idToMemberRequest",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_mapping(t_uint256,t_struct(MemberRequest)748_storage)"
+      },
+      {
+        "astId": 827,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_memberRequestAcceptances",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_mapping(t_bytes_memory_ptr,t_bool)"
+      },
+      {
+        "astId": 830,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_claimNumber",
+        "offset": 0,
+        "slot": "13",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 834,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_addressToClaimId",
+        "offset": 0,
+        "slot": "14",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 839,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_idToClaimRequest",
+        "offset": 0,
+        "slot": "15",
+        "type": "t_mapping(t_uint256,t_struct(InsuranceClaimRequest)757_storage)"
+      },
+      {
+        "astId": 843,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_addressToJudgeId",
+        "offset": 0,
+        "slot": "16",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 847,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_idToJudgeAddress",
+        "offset": 0,
+        "slot": "17",
+        "type": "t_mapping(t_uint256,t_address)"
+      },
+      {
+        "astId": 850,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_judgesSelected",
+        "offset": 0,
+        "slot": "18",
+        "type": "t_bool"
+      },
+      {
+        "astId": 855,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_judgements",
+        "offset": 0,
+        "slot": "19",
+        "type": "t_mapping(t_bytes_memory_ptr,t_struct(Judgement)762_storage)"
+      },
+      {
+        "astId": 859,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_judged",
+        "offset": 0,
+        "slot": "20",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 863,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_judgesFullfilledJobs",
+        "offset": 0,
+        "slot": "21",
+        "type": "t_array(t_struct(JudgementJobFullfilled)772_storage)dyn_storage"
+      },
+      {
+        "astId": 867,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_claimAccepted",
+        "offset": 0,
+        "slot": "22",
+        "type": "t_array(t_struct(ClaimAccepted)767_storage)dyn_storage"
+      },
+      {
+        "astId": 871,
+        "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+        "label": "s_balance",
+        "offset": 0,
+        "slot": "23",
+        "type": "t_mapping(t_address,t_uint256)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(ClaimAccepted)767_storage)dyn_storage": {
+        "base": "t_struct(ClaimAccepted)767_storage",
+        "encoding": "dynamic_array",
+        "label": "struct BurfyInsurance.ClaimAccepted[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_struct(JudgementJobFullfilled)772_storage)dyn_storage": {
+        "base": "t_struct(JudgementJobFullfilled)772_storage",
+        "encoding": "dynamic_array",
+        "label": "struct BurfyInsurance.JudgementJobFullfilled[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_bytes_memory_ptr": {
+        "encoding": "bytes",
+        "label": "bytes",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_bytes_memory_ptr,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_bytes_memory_ptr",
+        "label": "mapping(bytes => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_bytes_memory_ptr,t_struct(Judgement)762_storage)": {
+        "encoding": "mapping",
+        "key": "t_bytes_memory_ptr",
+        "label": "mapping(bytes => struct BurfyInsurance.Judgement)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Judgement)762_storage"
+      },
+      "t_mapping(t_uint256,t_address)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address)",
+        "numberOfBytes": "32",
+        "value": "t_address"
+      },
+      "t_mapping(t_uint256,t_struct(InsuranceClaimRequest)757_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct BurfyInsurance.InsuranceClaimRequest)",
+        "numberOfBytes": "32",
+        "value": "t_struct(InsuranceClaimRequest)757_storage"
+      },
+      "t_mapping(t_uint256,t_struct(MemberRequest)748_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct BurfyInsurance.MemberRequest)",
+        "numberOfBytes": "32",
+        "value": "t_struct(MemberRequest)748_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(ClaimAccepted)767_storage": {
+        "encoding": "inplace",
+        "label": "struct BurfyInsurance.ClaimAccepted",
+        "members": [
+          {
+            "astId": 764,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "claimId",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 766,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "amount",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_struct(InsuranceClaimRequest)757_storage": {
+        "encoding": "inplace",
+        "label": "struct BurfyInsurance.InsuranceClaimRequest",
+        "members": [
+          {
+            "astId": 750,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "memberAddress",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 752,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "requestUri",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 754,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "amount",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 756,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "accepted",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "128"
+      },
+      "t_struct(Judgement)762_storage": {
+        "encoding": "inplace",
+        "label": "struct BurfyInsurance.Judgement",
+        "members": [
+          {
+            "astId": 759,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "accepted",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool"
+          },
+          {
+            "astId": 761,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "reasonUri",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_struct(JudgementJobFullfilled)772_storage": {
+        "encoding": "inplace",
+        "label": "struct BurfyInsurance.JudgementJobFullfilled",
+        "members": [
+          {
+            "astId": 769,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "judgeId",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 771,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "amount",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_struct(MemberRequest)748_storage": {
+        "encoding": "inplace",
+        "label": "struct BurfyInsurance.MemberRequest",
+        "members": [
+          {
+            "astId": 743,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "memberAddress",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 745,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "requestUri",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 747,
+            "contract": "contracts/BurfyInsurance.sol:BurfyInsurance",
+            "label": "accepted",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
