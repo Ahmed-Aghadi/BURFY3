@@ -20,6 +20,7 @@ export default function Home() {
 
     useEffect(() => {
         fetchInsurances()
+        fetchDatas()
     }, [])
 
     const fetchInsurances = async () => {
@@ -31,6 +32,31 @@ export default function Home() {
         const data = await contractInstance.getContracts()
         setInsurances(data)
         console.log("data", data)
+    }
+
+    const fetchDatas = async () => {
+        try {
+            const options = {
+                method: "POST",
+                url: `https://deep-index.moralis.io/api/v2/${burfyContractAddress}/function`,
+                params: { chain: "eth", function_name: "getContracts" },
+                headers: {
+                    accept: "application/json",
+                    "content-type": "application/json",
+                    "X-API-Key": "test",
+                },
+                data: { abi: burfyAbi },
+            }
+
+            axios
+                .request(options)
+                .then(function (response) {
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+        } catch (error) {}
     }
 
     return (

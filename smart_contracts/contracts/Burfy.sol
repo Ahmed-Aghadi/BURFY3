@@ -69,18 +69,6 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
         return address(newInsurance);
     }
 
-    function performUpkeep(bytes calldata performData) external override {
-        (uint256 index, uint256 which) = abi.decode(performData, (uint256, uint256));
-        address contractAddress = s_contractInfos[index].contractAddress;
-        if (which == 0) {
-            s_contractInfos[index].judgingStartTime = 0;
-            getRandomNumbers(contractAddress);
-            return;
-        }
-        delete s_contractInfos[index];
-        BurfyInsurance(contractAddress).fullfillRequests();
-    }
-
     // Assumes the subscription is funded sufficiently.
     function getRandomNumbers(address contractAddress) public payable returns (uint256 requestId) {
         requestId = i_vrfCoordinator.requestRandomWords(
@@ -91,6 +79,18 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
             NUM_WORDS
         );
         s_requestIdToContractAddress[requestId] = contractAddress;
+    }
+
+    function performUpkeep(bytes calldata performData) external override {
+        (uint256 index, uint256 which) = abi.decode(performData, (uint256, uint256));
+        address contractAddress = s_contractInfos[index].contractAddress;
+        if (which == 0) {
+            s_contractInfos[index].judgingStartTime = 0;
+            getRandomNumbers(contractAddress);
+            return;
+        }
+        delete s_contractInfos[index];
+        BurfyInsurance(contractAddress).fullfillRequests();
     }
 
     /**
