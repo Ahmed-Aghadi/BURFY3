@@ -73,6 +73,7 @@ Connection to blockchain and uploading json to folder in ipfs was done using mor
 #### Atleast one example: 
 
 [uploading json inside a folder in ipfs](https://github.com/Ahmed-Aghadi/BURFY3/blob/main/client/my-app/pages/index.js#L38)
+
 [uploading json inside a folder in ipfs](https://github.com/Ahmed-Aghadi/BURFY3/blob/main/client/my-app/components/InsurancePage.jsx#L358)
 
 ### Chainlink
