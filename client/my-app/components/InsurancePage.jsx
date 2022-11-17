@@ -176,7 +176,7 @@ function InsurancePage() {
             )
             const baseUri = await contractInstance.getBaseUri()
             // const res = await fetch(`https://ipfs.io/ipfs/${baseUri}/data.json`)
-            const res = await fetch(`https://${baseUri}.ipfs.w3s.link/data.json`)
+            const res = await fetch(`https://${baseUri}.ipfs.dweb.link/data.json`)
             const data = await res.json()
             console.log(data)
             setTitle(data.title)

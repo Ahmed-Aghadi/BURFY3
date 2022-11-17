@@ -248,7 +248,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             return
         }
         setModalOpened(true)
-        const res = await fetch(`https://${requestUri}.ipfs.w3s.link/data.json`)
+        const res = await fetch(`https://${requestUri}.ipfs.dweb.link/data.json`)
         const data = await res.json()
         console.log(data)
         setDescription(data.description)
