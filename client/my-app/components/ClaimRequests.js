@@ -62,7 +62,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
 
         for (let i = 1; i <= totalRequests; i++) {
@@ -84,7 +84,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
             )
 
             const id = await contractInstance.getClaimIdByAddress(addressSelected)
@@ -153,7 +153,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
             )
 
             const resForJsonCid = await fetch(
@@ -226,7 +226,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())
         const id = await contractInstance.getClaimIdByAddress(address)

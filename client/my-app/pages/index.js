@@ -28,7 +28,7 @@ export default function Home() {
         const contractInstance = new ethers.Contract(
             burfyContractAddress,
             burfyAbi,
-            ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
         const data = await contractInstance.getContracts()
         setInsurances(data)

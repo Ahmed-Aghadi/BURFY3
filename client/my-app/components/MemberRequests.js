@@ -61,7 +61,7 @@ export function MemberRequests({ contractAddress, totalRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
 
         for (let i = 0; i <= totalRequests; i++) {
@@ -86,7 +86,7 @@ export function MemberRequests({ contractAddress, totalRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
             )
 
             const id = await contractInstance.getRequestIdByAddress(addressSelected)
@@ -142,7 +142,7 @@ export function MemberRequests({ contractAddress, totalRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())
         const id = await contractInstance.getRequestIdByAddress(address)

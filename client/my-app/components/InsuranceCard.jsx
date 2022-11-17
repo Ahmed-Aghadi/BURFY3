@@ -114,7 +114,7 @@ function InsuranceCard({ insurance }) {
         const contractInstance = new ethers.Contract(
             insuranceContractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.testnet.fantom.network")
+            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
         )
         const baseUri = await contractInstance.getBaseUri()
         const res = await fetch(`https://ipfs.io/ipfs/${baseUri}/data.json`)
