@@ -46,7 +46,8 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
         uint256 judgingTime, // (in seconds) time before judges should judge insurance claim requests.
         uint256 judgesLength, // number of judges
         uint256 amount, // amount everyone should put in the pool
-        uint256 percentDivideIntoJudges // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)
+        uint256 percentDivideIntoJudges, // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)
+        string memory groupId
     ) public payable returns (address) {
         BurfyInsurance newInsurance = new BurfyInsurance(
             baseUri,
@@ -57,7 +58,8 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
             judgingTime,
             judgesLength,
             amount,
-            percentDivideIntoJudges
+            percentDivideIntoJudges,
+            groupId
         );
 
         uint256 judgingStartTime = block.timestamp + requestTime + validity + claimTime;
@@ -89,7 +91,7 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
             getRandomNumbers(contractAddress);
             return;
         }
-        delete s_contractInfos[index];
+        s_contractInfos[index].judgingEndTime = 0;
         BurfyInsurance(contractAddress).fullfillRequests();
     }
 
@@ -98,7 +100,7 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
      * calls.
      */
     function fulfillRandomWords(
-        uint256 requestId, /* requestId */
+        uint256 requestId /* requestId */,
         uint256[] memory randomWords
     ) internal override {
         BurfyInsurance burfyInsurance = BurfyInsurance(s_requestIdToContractAddress[requestId]);
@@ -120,7 +122,7 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
                 break;
             }
             if (
-                s_contractInfos[i].contractAddress != address(0) &&
+                s_contractInfos[i].judgingEndTime != 0 &&
                 s_contractInfos[i].judgingEndTime < block.timestamp
             ) {
                 upkeepNeeded = true;

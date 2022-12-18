@@ -10,7 +10,7 @@ export const fantomChain: Chain = {
         decimals: 18,
     },
     rpcUrls: {
-        default: "https://rpc.ankr.com/fantom_testnet",
+        default: process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL!,
     },
     blockExplorers: {
         default: { name: "Ftmscan", url: "https://testnet.ftmscan.com" },

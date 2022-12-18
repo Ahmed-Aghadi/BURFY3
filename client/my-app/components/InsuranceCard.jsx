@@ -10,6 +10,8 @@ import {
     IconUsers,
     IconFriends,
     IconUserPlus,
+    IconReceiptTax,
+    IconCash,
 } from "@tabler/icons"
 import {
     Badge,
@@ -28,13 +30,17 @@ import { ethers } from "ethers"
 import { burfyInsuranceAbi, currency, sigmatorNFTAbi } from "../constants"
 import { useRouter } from "next/router"
 import { useAccount, useSigner } from "wagmi"
+import ChainContext from "../context/ChainProvider"
+import { useContext } from "react"
 
 const useStyles = createStyles((theme) => ({
     card: {
         backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+        boxShadow: theme.shadows.sm,
+        transition: "box-shadow 0.2s ease, transform 0.2s ease",
         "&:hover": {
             transform: "scale(1.01)",
-            boxShadow: theme.shadows.md,
+            boxShadow: theme.shadows.xl,
         },
     },
 
@@ -78,6 +84,7 @@ const mockdata = [
 ]
 
 function InsuranceCard({ insurance }) {
+    const ctx = useContext(ChainContext)
     const { classes, cx, theme } = useStyles()
     const features = mockdata.map((feature) => (
         <Center key={feature.label}>
@@ -114,10 +121,17 @@ function InsuranceCard({ insurance }) {
         const contractInstance = new ethers.Contract(
             insuranceContractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
+        console.log("chain", ctx.chain)
         const baseUri = await contractInstance.getBaseUri()
-        const res = await fetch(`https://ipfs.io/ipfs/${baseUri}/data.json`)
+        const res = await fetch(`https://${baseUri}.ipfs.nftstorage.link/data.json`)
         const data = await res.json()
         console.log(data)
         setTitle(data.title)
@@ -161,7 +175,9 @@ function InsuranceCard({ insurance }) {
                         <div>
                             <Text weight={500}>{title}</Text>
                             <Text size="xs" color="dimmed">
-                                {description.substring(0, 180) + "..."}
+                                {description.length == 0
+                                    ? description
+                                    : description.substring(0, 180) + "..."}
                             </Text>
                         </div>
                     </Group>
@@ -186,7 +202,7 @@ function InsuranceCard({ insurance }) {
                             <Text size="xs">{judgesLength} judges</Text>
                         </Center>
                         <Center>
-                            <IconGasStation size={18} className={classes.icon} stroke={1.5} />
+                            <IconCash size={18} className={classes.icon} stroke={1.5} />
                             <Text size="xs">{percentDivideIntoJudges}% for judges</Text>
                         </Center>
                         <Center>
@@ -204,7 +220,7 @@ function InsuranceCard({ insurance }) {
                     <Group spacing={30}>
                         <div>
                             <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-                                {amount} {currency}
+                                {amount} {currency[ctx.chain]}
                             </Text>
                             <Text
                                 size="sm"

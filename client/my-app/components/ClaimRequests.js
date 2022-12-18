@@ -1,11 +1,22 @@
 import { useEffect, useState } from "react"
-import { createStyles, Table, ScrollArea, Modal, Text, Skeleton } from "@mantine/core"
+import {
+    createStyles,
+    Table,
+    ScrollArea,
+    Modal,
+    Text,
+    Skeleton,
+    Textarea,
+    Button,
+} from "@mantine/core"
 import { burfyInsuranceAbi } from "../constants"
 import { useAccount, useSigner } from "wagmi"
 import { ethers } from "ethers"
 import { useRouter } from "next/router"
 import { IconCheck, IconX } from "@tabler/icons"
 import { showNotification, updateNotification } from "@mantine/notifications"
+import ChainContext from "../context/ChainProvider"
+import { useContext } from "react"
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -32,6 +43,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export function ClaimRequests({ contractAddress, totalClaimRequests }) {
+    const ctx = useContext(ChainContext)
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
     const [claimRequests, setClaimRequests] = useState([])
@@ -62,7 +74,13 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
 
         for (let i = 1; i <= totalRequests; i++) {
@@ -84,7 +102,13 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+                signer
+                    ? signer
+                    : ethers.getDefaultProvider(
+                          ctx.chain == "fantom"
+                              ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                      )
             )
 
             const id = await contractInstance.getClaimIdByAddress(addressSelected)
@@ -153,7 +177,13 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+                signer
+                    ? signer
+                    : ethers.getDefaultProvider(
+                          ctx.chain == "fantom"
+                              ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                      )
             )
 
             const resForJsonCid = await fetch(
@@ -226,7 +256,13 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())
         const id = await contractInstance.getClaimIdByAddress(address)
@@ -248,7 +284,7 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             return
         }
         setModalOpened(true)
-        const res = await fetch(`https://${requestUri}.ipfs.dweb.link/data.json`)
+        const res = await fetch(`https://${baseUri}.ipfs.nftstorage.link/data.json`)
         const data = await res.json()
         console.log(data)
         setDescription(data.description)

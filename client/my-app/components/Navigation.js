@@ -57,7 +57,8 @@ export function NavbarMinimal() {
         <NavbarLink
             {...link.props}
             key={link.props.label}
-            active={index === active || router.pathname.slice(1).split("/")[0] === link.path}
+            // active={index === active || router.pathname.slice(1).split("/")[0] === link.path}
+            active={router.pathname.slice(1).split("/")[0] === link.path}
             onClick={() => {
                 router.push("/" + link.path)
                 setActive(index)

@@ -28,20 +28,11 @@ import { IconCloudUpload, IconX, IconDownload, IconCheck } from "@tabler/icons"
 import { showNotification, updateNotification } from "@mantine/notifications"
 import { useAccount } from "wagmi"
 import { useSigner } from "wagmi"
-import axios from "axios"
 import { useContractRead, useContractWrite, usePrepareContractWrite, useSignMessage } from "wagmi"
 import { burfyAbi, burfyContractAddress, currency } from "../constants"
-// import {
-//     canisterId as genzerCanisterId,
-//     createActor as createGenzerActor,
-// } from "../../../declarations/genzer_backend/index"
-// import {
-//     canisterId as ledgerCanisterId,
-//     createActor as createLegerActor,
-// } from "../../../declarations/ledger/index"
-// import { AuthClient } from "@dfinity/auth-client"
-// import { useNavigate, useLocation } from "react-router-dom"
+import { Orbis } from "@orbisclub/orbis-sdk"
 import { useRouter } from "next/router"
+import ChainContext from "../context/ChainProvider"
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -109,6 +100,7 @@ const useStyles = createStyles((theme) => ({
 
 function Upload() {
     const router = useRouter()
+    const ctx = useContext(ChainContext)
     const { isConnected } = useAccount()
     const { data: signer, isError, isLoading } = useSigner()
     const [minMembers, setMinMembers] = useState(0)
@@ -157,6 +149,7 @@ function Upload() {
         percentDivideIntoJudgesValid
 
     const handlePost = async () => {
+        console.log("chain", ctx)
         if (!isConnected) {
             showNotification({
                 id: "hello-there",
@@ -214,7 +207,11 @@ function Upload() {
 
             // const parsedAmount = ethers.utils.parseUnits(goal, "ether")
 
-            const contractInstance = new ethers.Contract(burfyContractAddress, burfyAbi, signer)
+            const contractInstance = new ethers.Contract(
+                burfyContractAddress[ctx.chain],
+                burfyAbi,
+                signer
+            )
             // string memory baseUri,
             // uint256 minMembers,
             // uint256 requestTime, // (in seconds) time before one can make a request
@@ -224,6 +221,49 @@ function Upload() {
             // uint256 judgesLength, // number of judges
             // uint256 amount, // amount everyone should put in the pool
             // uint8 percentDivideIntoJudges // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)
+
+            let orbis = new Orbis()
+            console.log("orbis", orbis)
+            let resIsConnect = await orbis.isConnected()
+            console.log("resIsConnect", resIsConnect)
+            if (resIsConnect.status !== 200) {
+                console.log("not connected")
+                let resConnect = await orbis.connect()
+                console.log("resConnect", resConnect)
+                if (resConnect.status !== 200) {
+                    updateNotification({
+                        id: "load-data",
+                        autoClose: 5000,
+                        title: "Unable to connect with ceramic on orbis",
+                        message: "Check console for more details",
+                        color: "red",
+                        icon: <IconX />,
+                        className: "my-notification-class",
+                        loading: false,
+                    })
+                    return
+                }
+            }
+
+            let resGroup = await orbis.createGroup({
+                name: title,
+            })
+
+            if (resGroup.status !== 200) {
+                console.log("resGroup", resGroup)
+                updateNotification({
+                    id: "load-data",
+                    autoClose: 5000,
+                    title: "Unable to create group with ceramic on orbis",
+                    message: "Check console for more details",
+                    color: "red",
+                    icon: <IconX />,
+                    className: "my-notification-class",
+                    loading: false,
+                })
+                return
+            }
+
             console.log(
                 jsonCid,
                 minMembers,
@@ -233,39 +273,9 @@ function Upload() {
                 judgingTime,
                 judgesLength,
                 ethers.utils.parseUnits(amount.toString(), "ether"),
-                percentDivideIntoJudges
+                percentDivideIntoJudges,
+                resGroup.doc
             )
-
-            let cid
-            try {
-                const options = {
-                    method: "POST",
-                    url: "https://deep-index.moralis.io/api/v2/ipfs/uploadFolder",
-                    headers: {
-                        accept: "application/json",
-                        "content-type": "application/json",
-                        "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY,
-                    },
-                    data: [
-                        {
-                            path: "data.json",
-                            content: JSON.stringify({ title: title, description: description }),
-                        },
-                    ],
-                }
-
-                axios
-                    .request(options)
-                    .then(function (response) {
-                        console.log(response.data)
-                        cid = response.data.cid
-                    })
-                    .catch(function (error) {
-                        console.error(error)
-                    })
-            } catch (error) {
-                console.log(error)
-            }
 
             const tx = await contractInstance.createInsurance(
                 jsonCid,
@@ -276,7 +286,8 @@ function Upload() {
                 judgingTime,
                 judgesLength,
                 ethers.utils.parseUnits(amount.toString(), "ether"),
-                percentDivideIntoJudges
+                percentDivideIntoJudges,
+                resGroup.doc
                 // { gasLimit: 1000000 }
             )
             console.log("tx done")
@@ -634,9 +645,9 @@ function Upload() {
                 color={amountValid ? "teal" : undefined}
             >
                 <TextInput
-                    label={"Amount ( in " + currency + " )"}
+                    label={"Amount ( in " + currency[ctx.chain] + " )"}
                     required
-                    placeholder={"Amount in " + currency}
+                    placeholder={"Amount in " + currency[ctx.chain]}
                     onFocus={() => setAmountOpened(true)}
                     onBlur={() => setAmountOpened(false)}
                     mt="md"

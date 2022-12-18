@@ -8,57 +8,37 @@ import { useAccount, useSigner } from "wagmi"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { burfyAbi, burfyContractAddress } from "../constants"
-import axios from "axios"
 import Insurances from "../components/Insurances"
+import ChainContext from "../context/ChainProvider"
+import { useContext } from "react"
 
 export default function Home() {
+    const ctx = useContext(ChainContext)
     const { isConnected } = useAccount()
     const router = useRouter()
     const { data: signer, isError, isLoading } = useSigner()
 
     const [insurances, setInsurances] = useState([])
-    const [insuranceData, setInsuranceData] = useState([])
 
     useEffect(() => {
+        setInsurances([])
         fetchInsurances()
-        fetchDatas()
-    }, [])
+    }, [ctx.chain])
 
     const fetchInsurances = async () => {
+        console.log("retrieving insurances")
         const contractInstance = new ethers.Contract(
-            burfyContractAddress,
+            burfyContractAddress[ctx.chain],
             burfyAbi,
-            ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            ethers.getDefaultProvider(
+                ctx.chain == "fantom"
+                    ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                    : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+            )
         )
         const data = await contractInstance.getContracts()
         setInsurances(data)
         console.log("data", data)
-    }
-
-    const fetchDatas = async () => {
-        try {
-            const options = {
-                method: "POST",
-                url: `https://deep-index.moralis.io/api/v2/${burfyContractAddress}/function`,
-                params: { chain: "eth", function_name: "getContracts" },
-                headers: {
-                    accept: "application/json",
-                    "content-type": "application/json",
-                    "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY,
-                },
-                data: { abi: burfyAbi },
-            }
-
-            axios
-                .request(options)
-                .then(function (response) {
-                    setInsuranceData(response.data)
-                    console.log(response.data)
-                })
-                .catch(function (error) {
-                    console.error(error)
-                })
-        } catch (error) {}
     }
 
     return (

@@ -1,3 +1,8 @@
 {
-    "burfy": "0x3717c0A441189d828fFE2bdEc97485098CB1Dda2"
+    "burfy": {
+        "mumbai": "0xfD2BD78FFC99E68c7D6A86F77b8a700fA1c6Cbe6",
+        "fantom": "0xB1919680D9B464993b090fB54cA13B07357e3454",
+        "fantomRealContractAddress": "0xB1919680D9B464993b090fB54cA13B07357e3454",
+        "fantomOld": "0x3717c0A441189d828fFE2bdEc97485098CB1Dda2"
+    }
 }

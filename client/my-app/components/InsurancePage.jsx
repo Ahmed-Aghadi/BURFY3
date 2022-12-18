@@ -40,8 +40,11 @@ import { useAccount, useSigner } from "wagmi"
 import { Members } from "./Members"
 import { MemberRequests } from "./MemberRequests"
 import { ClaimRequests } from "./ClaimRequests"
+import ChatBox from "./ChatBox"
+import ChainContext from "../context/ChainProvider"
 
 function InsurancePage() {
+    const ctx = useContext(ChainContext)
     // const params = useParams();
     const router = useRouter()
     const { postAddress: postContractAddress } = router.query
@@ -90,27 +93,49 @@ function InsurancePage() {
     const [canUserAddAsMember, setCanUserAddAsMember] = useState(false)
 
     const [membersModalOpened, setMembersModalOpened] = useState(false)
+    const [groupId, setGroupId] = useState()
+    const [chatModalOpened, setChatModalOpened] = useState(false)
     useEffect(() => {
         if (router.isReady) {
             console.log("router.query.insuranceAddress", router.query.insuranceAddress)
+            setLoading(true)
             fetchFromContract()
         }
-    }, [router.isReady])
+    }, [router.isReady, signer, ctx.chain])
 
     useEffect(() => {
         if (router.isReady && signer) {
             checkIsUserMember()
         }
-    }, [router.isReady, signer])
+    }, [router.isReady, signer, ctx.chain])
+
+    // const checkSigner = async () => {
+    //     const res = await window.ethereum.send("eth_requestAccounts")
+    //     console.log("res", res)
+    //     console.log("signer", signer)
+    //     const provider1 = new ethers.providers.Web3Provider(window.ethereum)
+    //     const signer1 = provider1.getSigner()
+    //     console.log("signer1", signer1)
+    // }
 
     const checkIsUserMember = async () => {
+        console.log("checkIsUserMember", signer)
         const contractInstance = new ethers.Contract(
             router.query.insuranceAddress,
             burfyInsuranceAbi,
             signer
         )
+        // console.log(
+        //     "ddd",
+        //     ethers.utils.formatEther(
+        //         (await contractInstance.getClaimsAccepted())[0].amount.toString()
+        //     )
+        // )
 
-        const id = await contractInstance.getMemberIdByAddress(await signer.getAddress())
+        const id = (
+            await contractInstance.getMemberIdByAddress(await signer.getAddress())
+        ).toString()
+        console.log("id", id)
         if (id != 0) {
             setIsUserMember(1)
             checkUserBalance()
@@ -133,9 +158,13 @@ function InsurancePage() {
             signer
         )
 
+        const tM = (await contractInstance.getTotalMembers()).toString()
+
         const request = await contractInstance.getRequestById(requestId)
-        if (request.accepted == members) {
+        if (request.accepted == tM) {
             setCanUserAddAsMember(true)
+        } else {
+            setCanUserAddAsMember(false)
         }
     }
 
@@ -158,8 +187,12 @@ function InsurancePage() {
             burfyInsuranceAbi,
             signer
         )
+        console.log("checking")
 
-        const id = await contractInstance.getJudgeIdByAddress(await signer.getAddress())
+        const id = (
+            await contractInstance.getJudgeIdByAddress(await signer.getAddress())
+        ).toString()
+        console.log("id judge", id)
         if (id != 0) {
             setIsUserJudge(1)
         } else {
@@ -172,15 +205,23 @@ function InsurancePage() {
             const contractInstance = new ethers.Contract(
                 router.query.insuranceAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+                signer
+                    ? signer
+                    : ethers.getDefaultProvider(
+                          ctx.chain == "fantom"
+                              ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                      )
             )
             const baseUri = await contractInstance.getBaseUri()
             // const res = await fetch(`https://ipfs.io/ipfs/${baseUri}/data.json`)
-            const res = await fetch(`https://${baseUri}.ipfs.dweb.link/data.json`)
+            const res = await fetch(`https://${baseUri}.ipfs.nftstorage.link/data.json`)
             const data = await res.json()
             console.log(data)
             setTitle(data.title)
             setDescription(data.description)
+            const gId = await contractInstance.getGroupId()
+            setGroupId(gId)
             const mM = (await contractInstance.getMinMembers()).toString()
             console.log("minMembers", mM)
             setMinMembers(mM)
@@ -353,36 +394,6 @@ function InsurancePage() {
     }
 
     const handleJoinRequestClick = async () => {
-        let cid
-        try {
-            const options = {
-                method: "POST",
-                url: "https://deep-index.moralis.io/api/v2/ipfs/uploadFolder",
-                headers: {
-                    accept: "application/json",
-                    "content-type": "application/json",
-                    "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY,
-                },
-                data: [
-                    {
-                        path: "data.json",
-                        content: JSON.stringify({ description: joiningDescription }),
-                    },
-                ],
-            }
-
-            axios
-                .request(options)
-                .then(function (response) {
-                    console.log(response.data)
-                    cid = response.data.cid
-                })
-                .catch(function (error) {
-                    console.error(error)
-                })
-        } catch (error) {
-            console.log(error)
-        }
         if (!isConnected) {
             showNotification({
                 id: "hello-there",
@@ -605,6 +616,7 @@ function InsurancePage() {
             <Skeleton sx={loading ? { height: "85vh" } : null} visible={loading}>
                 {found ? (
                     <>
+                        {/* <Button onClick={checkSigner}>Check Signer</Button> */}
                         <Text
                             // component="span"
                             align="center"
@@ -644,7 +656,7 @@ function InsurancePage() {
                                             withdraw()
                                         }}
                                     >
-                                        Withdraw {userBalance} {currency}
+                                        Withdraw {userBalance} {currency[ctx.chain]}
                                     </Button>
                                 </Center>
                                 {active == 0 && (
@@ -914,6 +926,28 @@ function InsurancePage() {
                                 </Button>
                             )}
                         </Center>
+                        <Modal
+                            opened={chatModalOpened}
+                            size="55%"
+                            overflow="inside"
+                            onClose={() => setChatModalOpened(false)}
+                            title="Comments"
+                        >
+                            <ChatBox groupId={groupId} modalOpen={chatModalOpened} />
+                        </Modal>
+                        <Center>
+                            <Button
+                                mt="md"
+                                variant="outline"
+                                radius="md"
+                                size="md"
+                                onClick={() => {
+                                    setChatModalOpened(true)
+                                }}
+                            >
+                                see comments
+                            </Button>
+                        </Center>
                     </>
                 ) : (
                     <Text
@@ -957,6 +991,7 @@ function InsurancePage() {
                     opened={isClaimModalOpen}
                     onClose={() => setIsClaimModalOpen(false)}
                     title="Claim requests"
+                    size="70%"
                     overflow="inside"
                 >
                     <ClaimRequests

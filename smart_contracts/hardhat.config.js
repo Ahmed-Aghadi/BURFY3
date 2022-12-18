@@ -30,6 +30,7 @@ const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
 // Your API key for Etherscan, obtain one at https://etherscan.io/
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan API key"
+const FANTOMSCAN_API_KEY = process.env.FANTOMSCAN_API_KEY || "Your polygonscan API key"
 const REPORT_GAS = process.env.REPORT_GAS || false
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -99,21 +100,10 @@ module.exports = {
     etherscan: {
         // npx hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
         apiKey: {
-            rinkeby: ETHERSCAN_API_KEY,
-            kovan: ETHERSCAN_API_KEY,
-            polygon: POLYGONSCAN_API_KEY,
             polygonMumbai: POLYGONSCAN_API_KEY,
+            fantomtest: FANTOMSCAN_API_KEY,
+            ftmTestnet: FANTOMSCAN_API_KEY,
         },
-        customChains: [
-            {
-                network: "polygonMumbai",
-                chainId: 80001,
-                urls: {
-                    apiURL: "https://api-testnet.polygonscan.com",
-                    browserURL: "https://mumbai.polygonscan.com",
-                },
-            },
-        ],
     },
     gasReporter: {
         enabled: REPORT_GAS,

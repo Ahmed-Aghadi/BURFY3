@@ -6,6 +6,8 @@ import { ethers } from "ethers"
 import { useRouter } from "next/router"
 import { IconCheck, IconX } from "@tabler/icons"
 import { showNotification, updateNotification } from "@mantine/notifications"
+import ChainContext from "../context/ChainProvider"
+import { useContext } from "react"
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -32,6 +34,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export function MemberRequests({ contractAddress, totalRequests }) {
+    const ctx = useContext(ChainContext)
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
     const [memberRequests, setMemberRequests] = useState([])
@@ -61,7 +64,13 @@ export function MemberRequests({ contractAddress, totalRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
 
         for (let i = 0; i <= totalRequests; i++) {
@@ -86,7 +95,13 @@ export function MemberRequests({ contractAddress, totalRequests }) {
             const contractInstance = new ethers.Contract(
                 contractAddress,
                 burfyInsuranceAbi,
-                signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+                signer
+                    ? signer
+                    : ethers.getDefaultProvider(
+                          ctx.chain == "fantom"
+                              ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                      )
             )
 
             const id = await contractInstance.getRequestIdByAddress(addressSelected)
@@ -142,7 +157,13 @@ export function MemberRequests({ contractAddress, totalRequests }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())
         const id = await contractInstance.getRequestIdByAddress(address)
@@ -160,10 +181,12 @@ export function MemberRequests({ contractAddress, totalRequests }) {
             return
         }
         setModalOpened(true)
-        const res = await fetch(`https://${requestUri}.ipfs.dweb.link/data.json`)
-        const data = await res.json()
-        console.log(data)
-        setDescription(data.description)
+        if (baseUri != "") {
+            const res = await fetch(`https://${baseUri}.ipfs.nftstorage.link/data.json`)
+            const data = await res.json()
+            console.log(data)
+            setDescription(data.description)
+        }
         setLoading(false)
         updateNotification({
             id: "load-data",

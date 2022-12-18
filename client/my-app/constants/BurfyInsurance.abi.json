@@ -45,6 +45,11 @@
                 "internalType": "uint256",
                 "name": "percentDivideIntoJudges",
                 "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "groupId",
+                "type": "string"
             }
         ],
         "stateMutability": "nonpayable",
@@ -252,6 +257,19 @@
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getGroupId",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
             }
         ],
         "stateMutability": "view",

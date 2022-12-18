@@ -9,6 +9,7 @@ import {
     Text,
     Button,
     SimpleGrid,
+    SegmentedControl,
 } from "@mantine/core"
 import { NavbarMinimal } from "../components/Navigation"
 import { useLocalStorage } from "@mantine/hooks"
@@ -17,18 +18,20 @@ import "@rainbow-me/rainbowkit/styles.css"
 import { publicProvider } from "wagmi/providers/public"
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { chain, configureChains, createClient, useSigner, WagmiConfig } from "wagmi"
-import { alchemyProvider } from "wagmi/providers/alchemy"
 import { NotificationsProvider } from "@mantine/notifications"
 import { useAccount } from "wagmi"
 import { IconCircleDotted } from "@tabler/icons"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { fantomChain } from "../constants/fantomChain"
+import ChainContext, { ChainContextProvider } from "../context/ChainProvider"
+import { useContext } from "react"
+import { ChainToggle } from "../components/ChainToggle"
 
-const { chains, provider } = configureChains([fantomChain], [publicProvider()])
+const { chains, provider } = configureChains([fantomChain, chain.polygonMumbai], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
-    appName: "Sigmator",
+    appName: "Burfy3",
     chains,
 })
 
@@ -39,6 +42,8 @@ const wagmiClient = createClient({
 })
 
 function MyApp({ Component, pageProps }) {
+    const ctx = useContext(ChainContext)
+
     const [colorScheme, setColorScheme] = useLocalStorage({
         key: "mantine-color-scheme",
         defaultValue: "dark",
@@ -47,6 +52,10 @@ function MyApp({ Component, pageProps }) {
     const toggleColorScheme = (value) => {
         setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"))
     }
+    console.log("ctx", ctx)
+    useEffect(() => {
+        console.log("ctx", ctx)
+    }, [ctx])
 
     const { isConnected } = useAccount()
     const router = useRouter()
@@ -116,6 +125,9 @@ function MyApp({ Component, pageProps }) {
                                                         <IconCircleDotted size={35} />
                                                     </div>
                                                     <div>
+                                                        <ChainToggle />
+                                                    </div>
+                                                    <div>
                                                         <ConnectButton />
                                                     </div>
                                                     {/* <ConnectButton /> */}
@@ -143,4 +155,10 @@ function MyApp({ Component, pageProps }) {
     )
 }
 
-export default MyApp
+export default function AppWrapper(props) {
+    return (
+        <ChainContextProvider>
+            <MyApp {...props} />
+        </ChainContextProvider>
+    )
+}

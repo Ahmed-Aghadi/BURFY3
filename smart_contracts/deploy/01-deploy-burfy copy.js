@@ -25,7 +25,26 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         log: true,
         waitConfirmations: waitBlockConfirmations,
     })
+    console.log("burfy deployed to:", burfy.address)
+    await verify(burfy.address, arguments)
     log("----------------------------------------------------")
+}
+
+const verify = async (contractAddress, args) => {
+    console.log("Verifying contract...")
+    try {
+        await run("verify:verify", {
+            address: contractAddress,
+            constructorArguments: args,
+        })
+        console.log("verified")
+    } catch (e) {
+        if (e.message.toLowerCase().includes("already verified")) {
+            console.log("Already Verified!")
+        } else {
+            console.log(e)
+        }
+    }
 }
 
 module.exports.tags = ["all", "burfy"]

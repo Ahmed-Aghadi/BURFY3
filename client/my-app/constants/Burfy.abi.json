@@ -111,6 +111,11 @@
                 "internalType": "uint256",
                 "name": "percentDivideIntoJudges",
                 "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "groupId",
+                "type": "string"
             }
         ],
         "name": "createInsurance",

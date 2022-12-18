@@ -3,6 +3,8 @@ import { createStyles, Table, ScrollArea } from "@mantine/core"
 import { burfyInsuranceAbi } from "../constants"
 import { useAccount, useSigner } from "wagmi"
 import { ethers } from "ethers"
+import ChainContext from "../context/ChainProvider"
+import { useContext } from "react"
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -29,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export function Members({ contractAddress, totalMembers }) {
+    const ctx = useContext(ChainContext)
     const { classes, cx } = useStyles()
     const [scrolled, setScrolled] = useState(false)
     const [members, setMembers] = useState([])
@@ -53,7 +56,13 @@ export function Members({ contractAddress, totalMembers }) {
         const contractInstance = new ethers.Contract(
             contractAddress,
             burfyInsuranceAbi,
-            signer ? signer : ethers.getDefaultProvider("https://rpc.ankr.com/fantom_testnet")
+            signer
+                ? signer
+                : ethers.getDefaultProvider(
+                      ctx.chain == "fantom"
+                          ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                  )
         )
 
         for (let i = 0; i < totalMembers; i++) {

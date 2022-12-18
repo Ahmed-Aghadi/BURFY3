@@ -48,6 +48,7 @@ contract BurfyInsurance is Ownable {
     uint256 private immutable i_judgesLength;
     uint256 private immutable i_amount;
     uint256 private immutable i_percentageDividedIntoJudges;
+    string private s_groupId;
     bool private s_isMinMembersReachedCalculated; // also isJudges selected
     bool private s_isMinMembersReached;
     uint256 private s_totalClaimAmountRequested;
@@ -84,7 +85,8 @@ contract BurfyInsurance is Ownable {
         uint256 judgingTime, // (in seconds) time before judges should judge insurance claim requests.
         uint256 judgesLength, // number of judges
         uint256 amount, // amount everyone should put in the pool
-        uint256 percentDivideIntoJudges // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)
+        uint256 percentDivideIntoJudges, // percent of total pool amount that should be divided into judges (total pool amount = amount * members.length where members.length == s_memberNumber - 1) (only valid for judges who had judged every claim request)
+        string memory groupId
     ) {
         require(minMembers > 0, "BurfyInsurance: minMembers should be greater than 0");
         require(requestTime > 0, "BurfyInsurance: requestTime should be greater than 0");
@@ -115,6 +117,7 @@ contract BurfyInsurance is Ownable {
         i_judgesLength = judgesLength;
         i_amount = amount;
         i_percentageDividedIntoJudges = percentDivideIntoJudges;
+        s_groupId = groupId;
     }
 
     // function getBaseUri() public view returns (string memory) {
@@ -195,7 +198,7 @@ contract BurfyInsurance is Ownable {
     }
 
     function requestForInsurance(string memory baseUri, uint256 amount) public {
-        require(block.timestamp < i_validity, "Contract is not valid anymore");
+        require(block.timestamp > i_validity, "Contract is not valid anymore");
         require(block.timestamp < i_judgingStartTime, "Judging already started");
         require(s_addressToMemberId[msg.sender] != 0, "Not a member");
         require(s_addressToClaimId[msg.sender] == 0, "Insurance already exists");
@@ -206,11 +209,7 @@ contract BurfyInsurance is Ownable {
     }
 
     // judges will judge insurance claim requests
-    function updateInsurance(
-        uint256 claimId,
-        bool accepted,
-        string memory reasonUri
-    ) public {
+    function updateInsurance(uint256 claimId, bool accepted, string memory reasonUri) public {
         require(block.timestamp > i_judgingStartTime, "Judging not started yet");
         require(block.timestamp < i_judgingEndTime, "Judging already ended");
         require(s_addressToJudgeId[msg.sender] != 0, "Not a judge");
@@ -300,8 +299,9 @@ contract BurfyInsurance is Ownable {
         }
 
         // pay all the judges who fullfilled their job
-        uint256 amountForEachJudge = ((i_percentageDividedIntoJudges * i_amount) /
-            (100 * s_judgesFullfilledJobs.length));
+        uint256 amountForEachJudge = ((i_percentageDividedIntoJudges *
+            (s_memberNumber - 1) *
+            i_amount) / (100 * s_judgesFullfilledJobs.length));
         uint256 amountLeftForMembers = ((i_amount * (s_memberNumber - 1)) -
             (amountForEachJudge * s_judgesFullfilledJobs.length));
         for (uint256 i = 0; i < s_judgesFullfilledJobs.length; i++) {
@@ -340,7 +340,10 @@ contract BurfyInsurance is Ownable {
         if (s_totalClaimAmountAccepted >= amountLeftForMembers) {
             extraAmount = s_totalClaimAmountAccepted - amountLeftForMembers;
             amountLeftForMembers = 0;
+        } else {
+            amountLeftForMembers -= s_totalClaimAmountAccepted;
         }
+
         // pay insuranceClaimers who are accepted
         for (uint256 i = 0; i < s_claimAccepted.length; i++) {
             uint256 amountRequested = s_idToClaimRequest[s_claimAccepted[i].claimId].amount;
@@ -450,11 +453,10 @@ contract BurfyInsurance is Ownable {
         return s_addressToRequestId[memberAddress];
     }
 
-    function getMemberRequestAcceptance(uint256 memberId, uint256 requestId)
-        public
-        view
-        returns (bool)
-    {
+    function getMemberRequestAcceptance(
+        uint256 memberId,
+        uint256 requestId
+    ) public view returns (bool) {
         return s_memberRequestAcceptances[abi.encode(s_idToMemberAddress[memberId], requestId)];
     }
 
@@ -532,6 +534,10 @@ contract BurfyInsurance is Ownable {
 
     function getIsMinimumMembersReached() public view returns (bool) {
         return s_isMinMembersReached;
+    }
+
+    function getGroupId() public view returns (string memory) {
+        return s_groupId;
     }
 
     // function getIsAnyClaimAccepted() public view returns (bool) {
