@@ -69,7 +69,9 @@ export function MemberRequests({ contractAddress, totalRequests }) {
                 : ethers.getDefaultProvider(
                       ctx.chain == "fantom"
                           ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : ctx.chain == "mumbai"
+                          ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                   )
         )
 
@@ -100,12 +102,31 @@ export function MemberRequests({ contractAddress, totalRequests }) {
                     : ethers.getDefaultProvider(
                           ctx.chain == "fantom"
                               ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : ctx.chain == "mumbai"
+                              ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                       )
             )
 
             const id = await contractInstance.getRequestIdByAddress(addressSelected)
-            const tx = await await contractInstance.acceptJoiningRequest(id)
+            let tx
+            let chainIdCurr = ctx.chain == "mumbai" ? 80001 : ctx.chain == "fantom" ? 4002 : 5
+            if (signer.provider._network.chainId != chainIdCurr) {
+                const contractInstance1 = new ethers.Contract(
+                    burfyContractAddress[ctx.chain],
+                    burfyInsuranceAbi,
+                    signer
+                )
+                tx = await contractInstance1.acceptJoiningRequestMultiChain(
+                    router.query.insuranceAddress,
+                    id,
+                    {
+                        value: ethers.utils.parseEther("0.1"),
+                    }
+                )
+            } else {
+                tx = await contractInstance.acceptJoiningRequest(id)
+            }
             console.log("tx done")
 
             console.log("tx hash")
@@ -162,7 +183,9 @@ export function MemberRequests({ contractAddress, totalRequests }) {
                 : ethers.getDefaultProvider(
                       ctx.chain == "fantom"
                           ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : ctx.chain == "mumbai"
+                          ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                   )
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())

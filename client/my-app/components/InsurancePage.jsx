@@ -34,7 +34,7 @@ import {
     IconMessageDots,
 } from "@tabler/icons"
 import { ethers } from "ethers"
-import { burfyInsuranceAbi, currency } from "../constants"
+import { burfyContractAddress, burfyInsuranceAbi, currency } from "../constants"
 import { useRouter } from "next/router"
 import { useAccount, useSigner } from "wagmi"
 import { Members } from "./Members"
@@ -123,7 +123,13 @@ function InsurancePage() {
         const contractInstance = new ethers.Contract(
             router.query.insuranceAddress,
             burfyInsuranceAbi,
-            signer
+            ethers.getDefaultProvider(
+                ctx.chain == "fantom"
+                    ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                    : ctx.chain == "mumbai"
+                    ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                    : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
+            )
         )
         // console.log(
         //     "ddd",
@@ -155,7 +161,13 @@ function InsurancePage() {
         const contractInstance = new ethers.Contract(
             router.query.insuranceAddress,
             burfyInsuranceAbi,
-            signer
+            ethers.getDefaultProvider(
+                ctx.chain == "fantom"
+                    ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                    : ctx.chain == "mumbai"
+                    ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                    : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
+            )
         )
 
         const tM = (await contractInstance.getTotalMembers()).toString()
@@ -172,7 +184,13 @@ function InsurancePage() {
         const contractInstance = new ethers.Contract(
             router.query.insuranceAddress,
             burfyInsuranceAbi,
-            signer
+            ethers.getDefaultProvider(
+                ctx.chain == "fantom"
+                    ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                    : ctx.chain == "mumbai"
+                    ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                    : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
+            )
         )
 
         const balance = ethers.utils.formatEther(
@@ -185,7 +203,13 @@ function InsurancePage() {
         const contractInstance = new ethers.Contract(
             router.query.insuranceAddress,
             burfyInsuranceAbi,
-            signer
+            ethers.getDefaultProvider(
+                ctx.chain == "fantom"
+                    ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                    : ctx.chain == "mumbai"
+                    ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                    : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
+            )
         )
         console.log("checking")
 
@@ -205,13 +229,13 @@ function InsurancePage() {
             const contractInstance = new ethers.Contract(
                 router.query.insuranceAddress,
                 burfyInsuranceAbi,
-                signer
-                    ? signer
-                    : ethers.getDefaultProvider(
-                          ctx.chain == "fantom"
-                              ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
-                      )
+                ethers.getDefaultProvider(
+                    ctx.chain == "fantom"
+                        ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
+                        : ctx.chain == "mumbai"
+                        ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                        : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
+                )
             )
             const baseUri = await contractInstance.getBaseUri()
             // const res = await fetch(`https://ipfs.io/ipfs/${baseUri}/data.json`)
@@ -351,10 +375,26 @@ function InsurancePage() {
             const jsonCid = jsonOfResForJsonCid.cid
             console.log("stored json with cid:", jsonCid)
 
-            const tx = await contractInstance.requestForInsurance(
-                jsonCid,
-                ethers.utils.parseEther(claimAmount)
-            )
+            let tx
+            let chainIdCurr = ctx.chain == "mumbai" ? 80001 : ctx.chain == "fantom" ? 4002 : 5
+            if (signer.provider._network.chainId != chainIdCurr) {
+                const contractInstance1 = new ethers.Contract(
+                    burfyContractAddress[ctx.chain],
+                    burfyInsuranceAbi,
+                    signer
+                )
+                tx = await contractInstance1.requestForInsuranceMultiChain(
+                    router.query.insuranceAddress,
+                    jsonCid,
+                    ethers.utils.parseEther(claimAmount),
+                    { value: ethers.utils.parseEther("0.1") }
+                )
+            } else {
+                tx = await contractInstance.requestForInsurance(
+                    jsonCid,
+                    ethers.utils.parseEther(claimAmount)
+                )
+            }
             console.log("tx done")
 
             console.log("tx hash")
@@ -507,7 +547,20 @@ function InsurancePage() {
                 signer
             )
 
-            const tx = await contractInstance.addAsMember()
+            let tx
+            let chainIdCurr = ctx.chain == "mumbai" ? 80001 : ctx.chain == "fantom" ? 4002 : 5
+            if (signer.provider._network.chainId != chainIdCurr) {
+                const contractInstance1 = new ethers.Contract(
+                    burfyContractAddress[ctx.chain],
+                    burfyInsuranceAbi,
+                    signer
+                )
+                tx = await contractInstance1.addAsMemberMultiChain(router.query.insuranceAddress, {
+                    value: ethers.utils.parseEther("0.1"),
+                })
+            } else {
+                tx = await contractInstance.addAsMember()
+            }
             console.log("tx done")
 
             console.log("tx hash")
@@ -805,7 +858,7 @@ function InsurancePage() {
                                 </Text>
                                 <Text color="dimmed" size="sm">
                                     Total claim amount requests: {totalClaimAmountRequested}{" "}
-                                    {currency}
+                                    {currency[ctx.chain]}
                                 </Text>
                                 <Text size="xs" mt={4}>
                                     Ending Time:

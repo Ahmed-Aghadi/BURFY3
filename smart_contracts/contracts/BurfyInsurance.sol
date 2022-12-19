@@ -152,19 +152,42 @@ contract BurfyInsurance is Ownable {
     //     return s_claimNumber - 1;
     // }
 
+    // multichainExecute
+    function anyExecute(bytes memory _data) external returns (bool success, bytes memory result) {
+        (uint a, uint b, string memory c, bool d) = abi.decode(_data, (uint, uint, string, bool));
+        if (a == 0) {
+            _addAsMember(msg.sender);
+        } else if (a == 1) {
+            _acceptJoiningRequest(msg.sender, b);
+        } else if (a == 2) {
+            _requestForInsurance(msg.sender, c, b);
+        } else if (a == 3) {
+            _updateInsurance(msg.sender, b, d, c);
+        }
+        // (address from, uint256 fromChainId, ) = CallProxy(anycallExecutor)
+        //     .context();
+        // require(verifiedcaller == from, "AnycallClient: wrong context");
+        success = true;
+        result = "";
+    }
+
     function addAsMember() public {
+        _addAsMember(msg.sender);
+    }
+
+    function _addAsMember(address _msgSender) private {
         require(block.timestamp < i_requestBefore, "Adding member is not valid anymore");
-        require(s_addressToMemberId[msg.sender] == 0, "Already a member");
+        require(s_addressToMemberId[_msgSender] == 0, "Already a member");
         require(
-            s_idToMemberRequest[s_addressToRequestId[msg.sender]].accepted == s_memberNumber - 1,
+            s_idToMemberRequest[s_addressToRequestId[_msgSender]].accepted == s_memberNumber - 1,
             "Not all members accepted the request"
         );
-        uint256 id = s_addressToRequestId[msg.sender];
+        uint256 id = s_addressToRequestId[_msgSender];
         s_idToMemberRequest[id] = MemberRequest(address(0), "", 0);
-        s_addressToRequestId[msg.sender] = 0;
+        s_addressToRequestId[_msgSender] = 0;
 
-        s_idToMemberAddress[s_memberNumber] = msg.sender;
-        s_addressToMemberId[msg.sender] = s_memberNumber;
+        s_idToMemberAddress[s_memberNumber] = _msgSender;
+        s_addressToMemberId[_msgSender] = s_memberNumber;
         s_memberNumber++;
     }
 
@@ -174,16 +197,20 @@ contract BurfyInsurance is Ownable {
     // }
 
     function acceptJoiningRequest(uint256 requestId) public {
-        require(s_addressToMemberId[msg.sender] != 0, "Not a member");
+        _acceptJoiningRequest(msg.sender, requestId);
+    }
+
+    function _acceptJoiningRequest(address _msgSender, uint256 requestId) private {
+        require(s_addressToMemberId[_msgSender] != 0, "Not a member");
         require(
             s_idToMemberRequest[requestId].memberAddress != address(0),
             "Request does not exist"
         );
         require(
-            s_memberRequestAcceptances[abi.encode(msg.sender, requestId)] == false,
+            s_memberRequestAcceptances[abi.encode(_msgSender, requestId)] == false,
             "Already accepted"
         );
-        s_memberRequestAcceptances[abi.encode(msg.sender, requestId)] = true;
+        s_memberRequestAcceptances[abi.encode(_msgSender, requestId)] = true;
         s_idToMemberRequest[requestId].accepted += 1;
     }
 
@@ -198,40 +225,58 @@ contract BurfyInsurance is Ownable {
     }
 
     function requestForInsurance(string memory baseUri, uint256 amount) public {
+        _requestForInsurance(msg.sender, baseUri, amount);
+    }
+
+    function _requestForInsurance(
+        address _msgSender,
+        string memory baseUri,
+        uint256 amount
+    ) private {
         require(block.timestamp > i_validity, "Contract is not valid anymore");
         require(block.timestamp < i_judgingStartTime, "Judging already started");
-        require(s_addressToMemberId[msg.sender] != 0, "Not a member");
-        require(s_addressToClaimId[msg.sender] == 0, "Insurance already exists");
-        s_addressToClaimId[msg.sender] = s_claimNumber;
-        s_idToClaimRequest[s_claimNumber] = InsuranceClaimRequest(msg.sender, baseUri, amount, 0);
+        require(s_addressToMemberId[_msgSender] != 0, "Not a member");
+        require(s_addressToClaimId[_msgSender] == 0, "Insurance already exists");
+        s_addressToClaimId[_msgSender] = s_claimNumber;
+        s_idToClaimRequest[s_claimNumber] = InsuranceClaimRequest(_msgSender, baseUri, amount, 0);
         s_totalClaimAmountRequested += amount;
         s_claimNumber++;
     }
 
     // judges will judge insurance claim requests
     function updateInsurance(uint256 claimId, bool accepted, string memory reasonUri) public {
+        _updateInsurance(msg.sender, claimId, accepted, reasonUri);
+    }
+
+    // judges will judge insurance claim requests
+    function _updateInsurance(
+        address _msgSender,
+        uint256 claimId,
+        bool accepted,
+        string memory reasonUri
+    ) private {
         require(block.timestamp > i_judgingStartTime, "Judging not started yet");
         require(block.timestamp < i_judgingEndTime, "Judging already ended");
-        require(s_addressToJudgeId[msg.sender] != 0, "Not a judge");
+        require(s_addressToJudgeId[_msgSender] != 0, "Not a judge");
         require(
             s_idToClaimRequest[claimId].memberAddress != address(0),
             "Insurance does not exist"
         );
         if (
-            (s_judgements[abi.encode(msg.sender, claimId)].accepted == false &&
+            (s_judgements[abi.encode(_msgSender, claimId)].accepted == false &&
                 bytes(reasonUri).length != 0) ||
-            (s_judgements[abi.encode(msg.sender, claimId)].accepted == true)
+            (s_judgements[abi.encode(_msgSender, claimId)].accepted == true)
         ) {
             revert("Already updated");
         }
         if (!accepted) {
             require(bytes(reasonUri).length != 0, "Reason uri is empty");
         }
-        s_judgements[abi.encode(msg.sender, claimId)] = Judgement(accepted, reasonUri);
+        s_judgements[abi.encode(_msgSender, claimId)] = Judgement(accepted, reasonUri);
         if (accepted) {
             s_idToClaimRequest[claimId].accepted += 1;
         }
-        s_judged[msg.sender] += 1;
+        s_judged[_msgSender] += 1;
     }
 
     function selectJudges(uint256 randomNumber) public onlyOwner {

@@ -6,12 +6,34 @@ import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 
+interface CallProxy {
+    function anyCall(
+        address _to,
+        bytes calldata _data,
+        uint256 _toChainID,
+        uint256 _flags,
+        bytes calldata _extdata
+    ) external payable;
+
+    function context() external view returns (address from, uint256 fromChainID, uint256 nonce);
+
+    function executor() external view returns (address executor);
+}
+
 contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
     struct ContractInfo {
         address contractAddress;
         uint256 judgingStartTime;
         uint256 judgingEndTime;
     }
+
+    // multichain vars
+    address public anycallcontract;
+    address public anycallExecutor;
+    address public owneraddress;
+    uint public destchain;
+
+    // chainlink vars
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
     uint64 private immutable i_subscriptionId;
     bytes32 private immutable i_gasLane;
@@ -25,16 +47,100 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
     // address[] private s_insuranceContracts;
     ContractInfo[] private s_contractInfos;
 
+    receive() external payable {}
+
+    fallback() external payable {}
+
     constructor(
         address vrfCoordinatorV2,
         uint64 subscriptionId,
         bytes32 gasLane, // keyH
-        uint32 callbackGasLimit
+        uint32 callbackGasLimit,
+        address _anycallcontract,
+        uint _destchain
     ) VRFConsumerBaseV2(vrfCoordinatorV2) {
         i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
         i_gasLane = gasLane;
         i_subscriptionId = subscriptionId;
         i_callbackGasLimit = callbackGasLimit;
+
+        anycallcontract = _anycallcontract;
+        owneraddress = msg.sender;
+        destchain = _destchain;
+        anycallExecutor = CallProxy(anycallcontract).executor();
+    }
+
+    function changeanycallcontract(address _anycallcontract) external {
+        anycallcontract = _anycallcontract;
+        anycallExecutor = CallProxy(anycallcontract).executor();
+    }
+
+    function changeowneraddress(address _owneraddress) external {
+        owneraddress = _owneraddress;
+    }
+
+    function changechain(uint _destchain) external {
+        destchain = _destchain;
+    }
+
+    function addAsMemberMultiChain(address contractAddress) external payable {
+        CallProxy(anycallcontract).anyCall{value: msg.value}(
+            contractAddress,
+            // sending the encoded bytes of the string msg and decode on the destination chain
+            abi.encode(0, 0, "", false),
+            destchain,
+            // Using 0 flag to pay fee on the source chain
+            0,
+            ""
+        );
+    }
+
+    function acceptJoiningRequestMultiChain(
+        address contractAddress,
+        uint256 requestId
+    ) external payable {
+        CallProxy(anycallcontract).anyCall{value: msg.value}(
+            contractAddress,
+            // sending the encoded bytes of the string msg and decode on the destination chain
+            abi.encode(1, requestId, "", false),
+            destchain,
+            // Using 0 flag to pay fee on the source chain
+            0,
+            ""
+        );
+    }
+
+    function requestForInsuranceMultiChain(
+        address contractAddress,
+        string memory baseUri,
+        uint256 amount
+    ) external payable {
+        CallProxy(anycallcontract).anyCall{value: msg.value}(
+            contractAddress,
+            // sending the encoded bytes of the string msg and decode on the destination chain
+            abi.encode(2, amount, baseUri, false),
+            destchain,
+            // Using 0 flag to pay fee on the source chain
+            0,
+            ""
+        );
+    }
+
+    function updateInsuranceMultiChain(
+        address contractAddress,
+        uint256 claimId,
+        bool accepted,
+        string memory reasonUri
+    ) external payable {
+        CallProxy(anycallcontract).anyCall{value: msg.value}(
+            contractAddress,
+            // sending the encoded bytes of the string msg and decode on the destination chain
+            abi.encode(3, claimId, reasonUri, accepted),
+            destchain,
+            // Using 0 flag to pay fee on the source chain
+            0,
+            ""
+        );
     }
 
     function createInsurance(
@@ -129,6 +235,14 @@ contract Burfy is AutomationCompatibleInterface, VRFConsumerBaseV2 {
                 performData = abi.encode(i, 1);
                 break;
             }
+        }
+    }
+
+    function withdraw() public {
+        require(msg.sender == owneraddress, "Only owner can withdraw");
+        (bool success, ) = payable(msg.sender).call{value: address(this).balance}("");
+        if (!success) {
+            revert WithdrawFailed();
         }
     }
 

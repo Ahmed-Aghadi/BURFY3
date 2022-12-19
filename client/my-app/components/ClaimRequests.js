@@ -79,7 +79,9 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
                 : ethers.getDefaultProvider(
                       ctx.chain == "fantom"
                           ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : ctx.chain == "mumbai"
+                          ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                   )
         )
 
@@ -107,12 +109,33 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
                     : ethers.getDefaultProvider(
                           ctx.chain == "fantom"
                               ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : ctx.chain == "mumbai"
+                              ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                       )
             )
 
             const id = await contractInstance.getClaimIdByAddress(addressSelected)
-            const tx = await contractInstance.updateInsurance(id, true, "")
+            let tx
+            let chainIdCurr = ctx.chain == "mumbai" ? 80001 : ctx.chain == "fantom" ? 4002 : 5
+            if (signer.provider._network.chainId != chainIdCurr) {
+                const contractInstance1 = new ethers.Contract(
+                    burfyContractAddress[ctx.chain],
+                    burfyInsuranceAbi,
+                    signer
+                )
+                tx = await contractInstance1.updateInsuranceMultiChain(
+                    contractAddress,
+                    id,
+                    true,
+                    "",
+                    {
+                        value: ethers.utils.parseEther("0.1"),
+                    }
+                )
+            } else {
+                tx = tx = await contractInstance.updateInsurance(id, true, "")
+            }
             console.log("tx done")
 
             console.log("tx hash")
@@ -182,7 +205,9 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
                     : ethers.getDefaultProvider(
                           ctx.chain == "fantom"
                               ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                              : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : ctx.chain == "mumbai"
+                              ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                              : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                       )
             )
 
@@ -203,7 +228,26 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
             console.log("stored json with cid:", jsonCid)
 
             const id = await contractInstance.getClaimIdByAddress(addressSelected)
-            const tx = await await contractInstance.acceptJoiningRequest(id, false, jsonCid)
+            let tx
+            let chainIdCurr = ctx.chain == "mumbai" ? 80001 : ctx.chain == "fantom" ? 4002 : 5
+            if (signer.provider._network.chainId != chainIdCurr) {
+                const contractInstance1 = new ethers.Contract(
+                    burfyContractAddress[ctx.chain],
+                    burfyInsuranceAbi,
+                    signer
+                )
+                tx = await contractInstance1.updateInsuranceMultiChain(
+                    contractAddress,
+                    id,
+                    false,
+                    jsonCid,
+                    {
+                        value: ethers.utils.parseEther("0.1"),
+                    }
+                )
+            } else {
+                tx = tx = await contractInstance.updateInsurance(id, false, jsonCid)
+            }
             console.log("tx done")
 
             console.log("tx hash")
@@ -261,7 +305,9 @@ export function ClaimRequests({ contractAddress, totalClaimRequests }) {
                 : ethers.getDefaultProvider(
                       ctx.chain == "fantom"
                           ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : ctx.chain == "mumbai"
+                          ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                   )
         )
         const selfId = await contractInstance.getMemberIdByAddress(await signer.getAddress())

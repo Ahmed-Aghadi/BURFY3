@@ -28,7 +28,10 @@ import ChainContext, { ChainContextProvider } from "../context/ChainProvider"
 import { useContext } from "react"
 import { ChainToggle } from "../components/ChainToggle"
 
-const { chains, provider } = configureChains([fantomChain, chain.polygonMumbai], [publicProvider()])
+const { chains, provider } = configureChains(
+    [fantomChain, chain.polygonMumbai, chain.goerli],
+    [publicProvider()]
+)
 
 const { connectors } = getDefaultWallets({
     appName: "Burfy3",

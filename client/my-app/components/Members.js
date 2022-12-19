@@ -61,7 +61,9 @@ export function Members({ contractAddress, totalMembers }) {
                 : ethers.getDefaultProvider(
                       ctx.chain == "fantom"
                           ? process.env.NEXT_PUBLIC_FANTOM_TESTNET_RPC_URL
-                          : process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : ctx.chain == "mumbai"
+                          ? process.env.NEXT_PUBLIC_MUMBAI_RPC_URL
+                          : process.env.NEXT_PUBLIC_GOERLI_RPC_URL
                   )
         )
 

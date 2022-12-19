@@ -13,7 +13,8 @@ require("dotenv").config()
 const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL || "https://rpc-mumbai.matic.today"
 const FANTOM_TESTNET_RPC_URL =
     process.env.FANTOM_TESTNET_RPC_URL || "https://rpc.testnet.fantom.network"
-
+const GOERLI_RPC_URL =
+    process.env.GOERLI_RPC_URL || "https://eth-rinkeby.alchemyapi.io/v2/your-api-key"
 const MAINNET_RPC_URL =
     process.env.MAINNET_RPC_URL ||
     process.env.ALCHEMY_MAINNET_RPC_URL ||
@@ -65,6 +66,15 @@ module.exports = {
             saveDeployments: true,
             chainId: 4,
         },
+        goerli: {
+            url: GOERLI_RPC_URL,
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+            //   accounts: {
+            //     mnemonic: MNEMONIC,
+            //   },
+            saveDeployments: true,
+            chainId: 5,
+        },
         mainnet: {
             url: MAINNET_RPC_URL,
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
@@ -86,7 +96,7 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             saveDeployments: true,
             chainId: 80001,
-            gas: 500000,
+            gas: 100000000000,
         },
         // fantom testnet
         fantomtest: {
@@ -100,6 +110,7 @@ module.exports = {
     etherscan: {
         // npx hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
         apiKey: {
+            goerli: ETHERSCAN_API_KEY,
             polygonMumbai: POLYGONSCAN_API_KEY,
             fantomtest: FANTOMSCAN_API_KEY,
             ftmTestnet: FANTOMSCAN_API_KEY,

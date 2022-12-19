@@ -23,6 +23,8 @@ const networkConfig = {
         subscriptionId: "1919", // add your ID here!
         tablelandRegistry: "0x4b48841d4b32c4650e4abc117a03fe8b51f38f68",
         // nftCreatePrice: "10000000000000000", // 0.01 ETH
+        anycallcontract: "0x6afCFF9189e8ed3fCc1CFfa184FEB1276f6A82A5",
+        destchain: "4002",
     },
     4002: {
         name: "fantom testnet",
@@ -32,6 +34,19 @@ const networkConfig = {
         // mintFee: "10000000000000000", // 0.01 ETH
         subscriptionId: "119", // add your ID here!
         // nftCreatePrice: "10000000000000000", // 0.01 ETH
+        anycallcontract: "0xfCea2c562844A7D385a7CB7d5a79cfEE0B673D99",
+        destchain: "5",
+    },
+    5: {
+        name: "goerli",
+        vrfCoordinatorV2: "0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D",
+        gasLane: "0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
+        callbackGasLimit: "500000", // 500,000 gas
+        // mintFee: "10000000000000000", // 0.01 ETH
+        subscriptionId: "7819", // add your ID here!
+        // nftCreatePrice: "10000000000000000", // 0.01 ETH
+        anycallcontract: "0x965f84D915a9eFa2dD81b653e3AE736555d945f4",
+        destchain: "4002",
     },
     // 4: {
     //     name: "rinkeby",

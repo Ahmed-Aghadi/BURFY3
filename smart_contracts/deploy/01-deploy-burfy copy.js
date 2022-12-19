@@ -13,12 +13,21 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     let subscriptionId = networkConfig[chainId].subscriptionId
     let gasLane = networkConfig[chainId].gasLane
     let callbackGasLimit = networkConfig[chainId].callbackGasLimit
+    let anycallcontract = networkConfig[chainId].anycallcontract
+    let destchain = networkConfig[chainId].destchain
     const waitBlockConfirmations = developmentChains.includes(network.name)
         ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS
 
     log("----------------------------------------------------")
-    const arguments = [vrfCoordinatorV2Address, subscriptionId, gasLane, callbackGasLimit]
+    const arguments = [
+        vrfCoordinatorV2Address,
+        subscriptionId,
+        gasLane,
+        callbackGasLimit,
+        anycallcontract,
+        destchain,
+    ]
     const burfy = await deploy("Burfy", {
         from: deployer,
         args: arguments,

@@ -19,6 +19,10 @@ export function ChainToggle() {
                     label: "Mumbai",
                     value: "mumbai",
                 },
+                {
+                    label: "Goerli",
+                    value: "goerli",
+                },
             ]}
         />
     )
