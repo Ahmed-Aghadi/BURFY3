@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # BURFY3
-=======
 ## Details
 
 A decentralised p2p insurance platform.
@@ -92,4 +90,3 @@ Chainlink was used to randomly select an image out of all images of the post whi
 ### Mantine UI
 
 Mantine ui was heavily used in front end for styling.
->>>>>>> dcfaae06ac1fa9fc42bc08795c2ec035f9baf670
