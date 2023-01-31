@@ -25,7 +25,7 @@ If no judges had fullfilled their jobs then everyone except those judges will ge
 All contracts are deployed on fantom testnet, polygon mumbai and goerli. And moralis is used for getting data from contracts and performing other tasks like pushing json to ipfs folder, etc.
 [smart contract address](https://github.com/Ahmed-Aghadi/BURFY3/blob/main/client/my-app/constants/contractAddress.json)
 
-Multichain is used to let user interact to smart contract being on different chain. For polygon mumbai, anycallv7 isn't there, so user can interact with insurance contract created on Fantom testnet being on goerli ( paying gas fees on goerli ) or vice versa and dApp will automatically handle that.
+Multichain is used to let user interact to smart contract being on different chain. User can interact with insurance contract created on Fantom testnet being on goerli ( paying gas fees on goerli ) or vice versa and dApp will automatically handle that. dApp will pay the fees on the chain your wallet is connected to. For polygon mumbai, anycallv7 isn't there, so multichain compatibility isn't there for polygon mumbai. 
 
 User can also chat in comment section which is created using Orbis.club which uses CERAMIC under the hood.
 
